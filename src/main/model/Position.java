@@ -4,9 +4,10 @@ package model;
 public class Position {
     private String name;
     private Employee positionEmployee;
+    private Skill requiredSkill;
 
     //EFFECTS: Position has a given name and defaults to no employee filled
-    public Position(String name) {
+    public Position(String name, Skill requiredSkill) {
         this.name = name;
         positionEmployee = null;
     }
@@ -19,7 +20,7 @@ public class Position {
     //EFFECTS: Fills a position with an employee if the employee does not have a position.
     public Boolean fillPosition(Employee employee) {
         if (positionEmployee == null) {
-            if (employee.hasPosition() == false) {
+            if (!employee.hasPosition()) {
                 this.positionEmployee = employee;
                 employee.giveAssignment();
                 return true;

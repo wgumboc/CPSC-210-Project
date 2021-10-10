@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PositionTest {
+    private Skill skill1;
+    private Skill skill2;
     private Position position1;
     private Position position2;
     private Employee employee1;
@@ -15,8 +17,10 @@ class PositionTest {
 
     @BeforeEach
     public void runBefore() {
-        position1 = new Position("Line 1 Labeler");
-        position2 = new Position("Filler 1");
+        skill1 = new Skill("L1 Labeler");
+        skill2 = new Skill("Filler 1");
+        position1 = new Position("Line 1 Labeler", skill1);
+        position2 = new Position("Filler 1", skill2);
         employee1 = new Employee("Jane Doe");
         employee2 = new Employee("John Smith");
     }
