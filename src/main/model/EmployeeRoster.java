@@ -12,6 +12,25 @@ public class EmployeeRoster {
         roster = new ArrayList<>();
     }
 
+    public int rosterSize() {
+        return roster.size();
+    }
 
+    public Employee getEmployee(int i) {
+        return roster.get(i);
+    }
+
+    public void addEmployee(Employee employee) {
+        roster.add(employee);
+    }
+
+    public void removeEmployee(Employee employee) {
+        for (int i = 0; i < roster.size(); i++) {
+            if (roster.get(i) == employee) {
+                roster.remove(i);
+                break;
+            }
+        }
+    }
 
 }
