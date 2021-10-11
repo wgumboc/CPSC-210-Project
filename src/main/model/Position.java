@@ -31,7 +31,7 @@ public class Position {
         return false;
     }
 
-    //EFFECTS:
+    //EFFECTS: returns the employee who has filled the position
     public Employee getPositionEmployee() {
         return positionEmployee;
     }

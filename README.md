@@ -19,9 +19,7 @@ the user if there is a skills-position mismatch, and altering the user if an emp
 - As a user, I want to be able to add/remove an employee to my roster.
 - As a user, I want to be able to add/remove skills to an employee.
 - As a user, I want to be able to add/remove positions that need to be filled.
-- As a user, I want to be able to add/remove skills required to fill a position. 
-- As a user, I want to be able to add/remove shifts for that position. 
-- As a user, I want to be able to see a grid that shows all position spaces needed to be filled.
+- As a user, I want to be able to add/remove skills required to fill a position.
 - As a user, I want to be able to populate people in those positions, and for the program to tell 
 me if they do not have the required skills for that position. 
 
