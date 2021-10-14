@@ -74,7 +74,7 @@ public class ManningScheduleApp {
         } else if (selection == 2) {
             removeEmployeeUI();
         } else if (selection == 3) {
-            // addSkillEmployeeUI();
+            addSkillEmployeeUI();
         } else if (selection == 4) {
             showAllEmployeesUI();
         } else if (selection == 5) {
@@ -133,6 +133,33 @@ public class ManningScheduleApp {
             Employee employee = roster.getEmployee(i);
             System.out.println(employee.getEmployeeName());
         }
+        employeeMenu();
+    }
+
+    // EFFECTS: Adds a skill to an employee based on set skills.
+    private void addSkillEmployeeUI() {
+        Scanner userSelection = new Scanner(System.in);
+        Employee employee;
+
+        System.out.println("Please select an employee.");
+
+        for (int i = 0; i < roster.rosterSize(); i++) {
+            employee = roster.getEmployee(i);
+            System.out.println(i + " - " + employee.getEmployeeName());
+        }
+
+        inputNum = userSelection.nextInt();
+
+        employee = roster.getEmployee(inputNum);
+
+        System.out.println("Please select a skill to add to an employee");
+
+        skillsList();
+
+        employeeMenu();
+    }
+
+    private void skillsList() {
         employeeMenu();
     }
 
