@@ -10,6 +10,7 @@ public class ManningScheduleApp {
     private int inputNum;
 
     public ManningScheduleApp() {
+        createLists();
         menu();
     }
 
@@ -17,8 +18,6 @@ public class ManningScheduleApp {
     // EFFECTS: lets user select menu
     private void menu() {
         Scanner userSelection = new Scanner(System.in);
-
-        createLists();
 
         System.out.println("\n What would you like to do?");
         System.out.println("\t Press 1 to go to the employee menu.");
@@ -273,11 +272,11 @@ public class ManningScheduleApp {
         if (selection == 1) {
             addPosition();
         } else if (selection == 2) {
-            // removePosition();
+            removePosition();
         } else if (selection == 3) {
-            // showAllPositions();
+            showAllPositions();
         } else if (selection == 4) {
-            // selectPosition();
+            selectPosition();
         } else if (selection == 5) {
             menu();
         } else {
@@ -308,6 +307,130 @@ public class ManningScheduleApp {
         positionList.addPosition(position);
 
         System.out.println("Added " + positionName + " to list of positions.");
+
+        positionMenu();
+    }
+
+    // EFFECTS: Removes a position from the list of positions.
+    private void removePosition() {
+        Scanner positionNum = new Scanner(System.in);
+        Position posToRemove;
+
+        System.out.println("Here are all the positions for the department:");
+
+        for (int i = 0; i < positionList.positionListSize(); i++) {
+            Position position = positionList.getPosition(i);
+            System.out.println(i + " - " + position.getPositionName());
+        }
+
+        System.out.println("Enter the number of the position you would like to remove.");
+
+        inputNum = positionNum.nextInt();
+
+        if (inputNum < positionList.positionListSize()) {
+            posToRemove = positionList.getPosition(inputNum);
+            positionList.removePosition(posToRemove);
+            System.out.println("Removed " + posToRemove.getPositionName() + " from the list.");
+        } else {
+            System.out.println("Not a valid selection");
+        }
+
+        positionMenu();
+    }
+
+    // EFFECTS: Displays all positions in the department.
+    private void showAllPositions() {
+        Position position;
+        Employee positionEmployee;
+
+        for (int i = 0; i < positionList.positionListSize(); i++) {
+            position = positionList.getPosition(i);
+            positionEmployee = position.getPositionEmployee();
+            if (position.getPositionEmployee() == null) {
+                System.out.println(position.getPositionName() + " - not filled");
+            } else {
+                System.out.println(position.getPositionName() + " filled by " + positionEmployee.getEmployeeName());
+            }
+        }
+        positionMenu();
+    }
+
+    // EFFECTS: Displays a menu with actions to act on a position.
+    private void selectPosition() {
+        Scanner userSelection = new Scanner(System.in);
+        Position position;
+
+        System.out.println("Please select a position.");
+
+        for (int i = 0; i < positionList.positionListSize(); i++) {
+            position = positionList.getPosition(i);
+            System.out.println(i + " - " + position.getPositionName());
+        }
+
+        inputNum = userSelection.nextInt();
+        position = positionList.getPosition(inputNum);
+        System.out.println("You have selected " + position.getPositionName());
+
+        System.out.println("\n What would you like to do?");
+        System.out.println("\t Press 1 to assign an employee.");
+        System.out.println("\t Press 2 to remove an assigned employee.");
+        System.out.println("\t Press 3 to return to position menu.");
+
+        inputNum = userSelection.nextInt();
+
+        positionSelection(inputNum, position);
+    }
+
+    // EFFECTS: Directs the user to the appropriate action for the position.
+    private void positionSelection(int selection, Position position) {
+        if (selection == 1) {
+            fillPosition(position);
+        } else if (selection == 2) {
+            removeAssignment(position);
+        } else if (selection == 3) {
+            employeeMenu();
+        } else {
+            System.out.println("Not a valid selection.");
+            selectPosition();
+        }
+    }
+
+    // EFFECTS: Adds a skill to an employee based on set skills.
+    private void fillPosition(Position position) {
+        Scanner userSelection = new Scanner(System.in);
+        Employee employee;
+
+        System.out.println("Which employee would you like to assign to this position?");
+
+        for (int i = 0; i < roster.rosterSize(); i++) {
+            employee = roster.getEmployee(i);
+            System.out.println(i + " - " + employee.getEmployeeName());
+        }
+
+        inputNum = userSelection.nextInt();
+        employee = roster.getEmployee(inputNum);
+
+        if (employee.hasPosition()) {
+            System.out.println(employee.getEmployeeName() + " already has a position.");
+        } else if (!position.fillPosition(employee)) {
+            System.out.println(position.getPositionName() + " is already filled.");
+        } else {
+            position.fillPosition(employee);
+            System.out.println(employee.getEmployeeName() + " has been assigned to " + position.getPositionName());
+        }
+
+        positionMenu();
+    }
+
+    // EFFECTS: Removes the assigned employee from the position.
+    private void removeAssignment(Position position) {
+        Employee posEmployee = position.getPositionEmployee();
+        if (!position.removeEmployee()) {
+            System.out.println("No employee in position.");
+        } else {
+            position.removeEmployee();
+            System.out.println(posEmployee.getEmployeeName() + " has been removed from " + position.getPositionName());
+        }
 
         positionMenu();
     }

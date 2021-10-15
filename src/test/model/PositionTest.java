@@ -3,9 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PositionTest {
     private Skill skill1;
@@ -36,6 +34,15 @@ class PositionTest {
         assertEquals(employee1, position1.getPositionEmployee()); //ensure correct employee is assigned to position
         assertFalse(position1.fillPosition(employee2)); //ensure you cannot fill a position that is filled
         assertFalse(position2.fillPosition(employee1)); //ensure you cannot assign an employee who is already assigned
+    }
+
+    @Test
+    public void testRemovePosition() {
+        position1.fillPosition(employee1);
+        assertEquals(employee1, position1.getPositionEmployee());
+        assertTrue(position1.removeEmployee());
+        assertNull(position1.getPositionEmployee());
+        assertFalse(position1.removeEmployee());
     }
 
 }

@@ -31,6 +31,17 @@ public class Position {
         return false;
     }
 
+    //EFFECTS: Removes the employee assigned to the position.
+    public Boolean removeEmployee() {
+        if (positionEmployee == null) {
+            return false;
+        } else {
+            positionEmployee.removeAssignment();
+            positionEmployee = null;
+            return true;
+        }
+    }
+
     //EFFECTS: returns the employee who has filled the position
     public Employee getPositionEmployee() {
         return positionEmployee;
