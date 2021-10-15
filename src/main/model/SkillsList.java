@@ -8,6 +8,7 @@ public class SkillsList {
     private List<Skill> skillsList;
     private String skillName;
 
+    // EFFECTS: Creates an empty list for the skills list.
     public SkillsList() {
         skillsList = new ArrayList<>();
     }
@@ -31,20 +32,25 @@ public class SkillsList {
         skillsList.addAll(temp);
     }
 
+    // MODIFIES: skillsList
+    // EFFECTS: Adds a skill to the list of skills
     public void addSkill(Skill skill) {
         skillsList.add(skill);
     }
 
+    // EFFECTS: Returns the size of the list of skills
     public int skillsListSize() {
         return skillsList.size();
     }
 
+    // REQUIRES: 0 <= i <= size of skillsList
+    // EFFECTS: Returns a skill from the list of skills at index i.
     public Skill getSkill(int i) {
         return skillsList.get(i);
     }
 
-    //MODIFIES: roster
-    //EFFECTS: removes an employee from the roster
+    //MODIFIES: skillsList
+    //EFFECTS: removes a skill from the list of skills
     public void removeSkill(Skill skill) {
         for (int i = 0; i < skillsList.size(); i++) {
             if (skillsList.get(i) == skill) {

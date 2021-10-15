@@ -18,6 +18,7 @@ public class EmployeeRoster {
         return roster.size();
     }
 
+    // REQUIRES: 0 <= i <= size of roster
     //EFFECTS: returns an employee in the roster
     public Employee getEmployee(int i) {
         return roster.get(i);
