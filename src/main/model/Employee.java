@@ -8,6 +8,7 @@ public class Employee {
     private Boolean hasPosition;
     private SkillsList employeeSkills;
 
+    // REQUIRES: name is a string
     // EFFECTS: employee has given name and defaults to has no position
     public Employee(String name) {
         this.name = name;
@@ -15,7 +16,7 @@ public class Employee {
         employeeSkills = new SkillsList();
     }
 
-    // EFFECTS: returns case number
+    // EFFECTS: returns employee name
     public String getEmployeeName() {
         return name;
     }

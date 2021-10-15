@@ -7,7 +7,7 @@ public class Position {
     private Skill requiredSkill;
     private Boolean positionFull;
 
-    //EFFECTS: Position has a given name and defaults to no employee filled
+    // EFFECTS: Position has a given name and defaults to no employee filled
     public Position(String name, Skill requiredSkill) {
         this.name = name;
         this.requiredSkill = requiredSkill;
@@ -15,12 +15,13 @@ public class Position {
         positionFull = false;
     }
 
-    //EFFECTS: Returns position name.
+    // EFFECTS: Returns position name.
     public String getPositionName() {
         return name;
     }
 
-    //EFFECTS: Fills a position with an employee if the employee does not have a position.
+    // MODIFIES: positionEmployee
+    // EFFECTS: Fills a position with an employee if the employee does not have a position.
     public Boolean fillPosition(Employee employee) {
         if (positionEmployee == null) {
             if (!employee.hasPosition()) {
@@ -35,7 +36,8 @@ public class Position {
         return false;
     }
 
-    //EFFECTS: Removes the employee assigned to the position.
+    // MODIFIES: positionEmployee
+    // EFFECTS: Removes the employee assigned to the position.
     public Boolean removeEmployee() {
         if (positionEmployee == null) {
             return false;

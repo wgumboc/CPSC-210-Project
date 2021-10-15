@@ -19,19 +19,19 @@ public class EmployeeRoster {
     }
 
     // REQUIRES: 0 <= i <= size of roster
-    //EFFECTS: returns an employee in the roster
+    // EFFECTS: returns an employee in the roster
     public Employee getEmployee(int i) {
         return roster.get(i);
     }
 
-    //MODIFIES: roster
-    //EFFECTS: adds an employee to the roster
+    // MODIFIES: roster
+    // EFFECTS: adds an employee to the roster
     public void addEmployee(Employee employee) {
         roster.add(employee);
     }
 
-    //MODIFIES: roster
-    //EFFECTS: removes an employee from the roster
+    // MODIFIES: roster
+    // EFFECTS: removes an employee from the roster
     public void removeEmployee(Employee employee) {
         for (int i = 0; i < roster.size(); i++) {
             if (roster.get(i) == employee) {
