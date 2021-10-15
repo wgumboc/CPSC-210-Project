@@ -36,4 +36,9 @@ class EmployeeTest {
         assertFalse(employee1.hasPosition());
     }
 
+    @Test
+    public void testGetSkills() {
+        SkillsList skillsList = employee1.getSkills();
+        assertEquals(0, skillsList.skillsListSize());
+    }
 }
