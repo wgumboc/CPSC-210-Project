@@ -49,11 +49,13 @@ public class ManningScheduleApp {
                 scanner.next();
             }
             num = scanner.nextInt();
+            if (num < 0) {
+                System.out.println("Please enter a non-negative integer.");
+            }
         } while (num < 0);
         return num;
     }
 
-    // REQUIRES: selection is an integer
     // EFFECTS: directs user to correct menu
     private void menuSelection(int selection) {
         if (selection == 1) {
@@ -84,7 +86,6 @@ public class ManningScheduleApp {
         employeeMenuSelection(inputNum);
     }
 
-    // REQUIRES: selection is an integer
     // EFFECTS: directs user to correct employee operation
     private void employeeMenuSelection(int selection) {
         if (selection == 1) {
@@ -184,7 +185,6 @@ public class ManningScheduleApp {
         employeeSelection(inputNum, employee);
     }
 
-    // REQUIRES: selection is an integer
     // EFFECTS: Directs the user to the appropriate action for the employee.
     private void employeeSelection(int selection, Employee employee) {
         if (selection == 1) {
@@ -218,14 +218,13 @@ public class ManningScheduleApp {
 
         if (employeeSkills.hasSkill(skill)) {
             System.out.println("Employee already has selected skill.");
+            employeeMenu();
         } else {
             employeeSkills.addSkill(skill);
 
             System.out.println(skill.getSkillName() + " attributed to " + employee.getEmployeeName());
             displaySkills(employee);
         }
-
-        employeeMenu();
     }
 
     // MODIFIES: employeeSkills
@@ -298,7 +297,6 @@ public class ManningScheduleApp {
         positionMenuSelection(inputNum);
     }
 
-    // REQUIRES: selection is an integer
     // EFFECTS: directs user to correct position operation
     private void positionMenuSelection(int selection) {
         if (selection == 1) {
@@ -412,7 +410,6 @@ public class ManningScheduleApp {
         positionSelection(inputNum, position);
     }
 
-    // REQUIRES: selection is an integer
     // EFFECTS: Directs the user to the appropriate action for the position.
     private void positionSelection(int selection, Position position) {
         if (selection == 1) {
@@ -420,7 +417,7 @@ public class ManningScheduleApp {
         } else if (selection == 2) {
             removeAssignment(position);
         } else if (selection == 3) {
-            employeeMenu();
+            positionMenu();
         } else {
             System.out.println("Not a valid selection.");
             selectPosition();
