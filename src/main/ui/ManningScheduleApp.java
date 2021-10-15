@@ -34,9 +34,23 @@ public class ManningScheduleApp {
         System.out.println("\t Press 2 to go to the positions menu.");
         System.out.println("\t Press 3 to exit.");
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
 
         menuSelection(inputNum);
+    }
+
+    // templated from https://stackoverflow.com/questions/3059333/validating-input-using-java-util-scanner
+    // EFFECTS: scans for user input and rejects non-integers
+    private int selectionScanning(Scanner scanner) {
+        int num;
+        do {
+            while (!scanner.hasNextInt()) {
+                System.out.println("Please enter an integer.");
+                scanner.next();
+            }
+            num = scanner.nextInt();
+        } while (num < 0);
+        return num;
     }
 
     // REQUIRES: selection is an integer
@@ -65,7 +79,7 @@ public class ManningScheduleApp {
         System.out.println("\t Press 4 to select an employee.");
         System.out.println("\t Press 5 to return to main menu.");
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
 
         employeeMenuSelection(inputNum);
     }
@@ -120,7 +134,7 @@ public class ManningScheduleApp {
 
         System.out.println("Enter the number of the employee you would like to remove.");
 
-        inputNum = employeeNum.nextInt();
+        inputNum = selectionScanning(employeeNum);
 
         if (inputNum < roster.rosterSize()) {
             eeToRemove = roster.getEmployee(inputNum);
@@ -154,7 +168,8 @@ public class ManningScheduleApp {
             System.out.println(i + " - " + employee.getEmployeeName());
         }
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
+
         employee = roster.getEmployee(inputNum);
         System.out.println("You have selected " + employee.getEmployeeName());
 
@@ -164,7 +179,7 @@ public class ManningScheduleApp {
         System.out.println("\t Press 3 to display all skills.");
         System.out.println("\t Press 4 to return to employee menu.");
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
 
         employeeSelection(inputNum, employee);
     }
@@ -196,7 +211,7 @@ public class ManningScheduleApp {
         System.out.println("Please select a skill to add to an employee");
         skillsListDisplay(qcDepSkills);
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
 
         skill = qcDepSkills.getSkill(inputNum);
         employeeSkills = employee.getSkills();
@@ -230,7 +245,7 @@ public class ManningScheduleApp {
 
         System.out.println("Enter the number of the skill you would like to remove.");
 
-        inputNum = skillNum.nextInt();
+        inputNum = selectionScanning(skillNum);
 
         if (inputNum < employeeSkills.skillsListSize()) {
             skillToRemove = employeeSkills.getSkill(inputNum);
@@ -278,7 +293,7 @@ public class ManningScheduleApp {
         System.out.println("\t Press 4 to select a position.");
         System.out.println("\t Press 5 to return to main menu.");
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
 
         positionMenuSelection(inputNum);
     }
@@ -315,7 +330,7 @@ public class ManningScheduleApp {
         
         skillsListDisplay(qcDepSkills);
 
-        inputNum = input.nextInt();
+        inputNum = selectionScanning(input);
         skill = qcDepSkills.getSkill(inputNum);
 
         Position position = new Position(positionName, skill);
@@ -341,7 +356,7 @@ public class ManningScheduleApp {
 
         System.out.println("Enter the number of the position you would like to remove.");
 
-        inputNum = positionNum.nextInt();
+        inputNum = selectionScanning(positionNum);
 
         if (inputNum < positionList.positionListSize()) {
             posToRemove = positionList.getPosition(inputNum);
@@ -383,7 +398,7 @@ public class ManningScheduleApp {
             System.out.println(i + " - " + position.getPositionName());
         }
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
         position = positionList.getPosition(inputNum);
         System.out.println("You have selected " + position.getPositionName());
 
@@ -392,7 +407,7 @@ public class ManningScheduleApp {
         System.out.println("\t Press 2 to remove an assigned employee.");
         System.out.println("\t Press 3 to return to position menu.");
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
 
         positionSelection(inputNum, position);
     }
@@ -424,7 +439,7 @@ public class ManningScheduleApp {
             System.out.println(i + " - " + employee.getEmployeeName());
         }
 
-        inputNum = userSelection.nextInt();
+        inputNum = selectionScanning(userSelection);
         employee = roster.getEmployee(inputNum);
 
         assignPosition(position, employee);
