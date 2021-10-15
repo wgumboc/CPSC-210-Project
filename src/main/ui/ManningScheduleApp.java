@@ -2,7 +2,6 @@ package ui;
 
 import model.*;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class ManningScheduleApp {
@@ -233,7 +232,6 @@ public class ManningScheduleApp {
     private void displaySkills(Employee employee) {
         SkillsList skillsList;
         Skill skill;
-        Scanner userSelection = new Scanner(System.in);
         skillsList = employee.getSkills();
 
         System.out.println(employee.getEmployeeName() + " has the following skills:");
@@ -256,11 +254,62 @@ public class ManningScheduleApp {
 
     // EFFECTS: gives user options for position
     private void positionMenu() {
+        Scanner userSelection = new Scanner(System.in);
+
         System.out.println("\n What would you like to do?");
         System.out.println("\t Press 1 to add a position.");
         System.out.println("\t Press 2 to remove a position.");
         System.out.println("\t Press 3 to show all positions.");
-        System.out.println("\t Press 4 to return to main menu.");
+        System.out.println("\t Press 4 to select a position.");
+        System.out.println("\t Press 5 to return to main menu.");
+
+        inputNum = userSelection.nextInt();
+
+        positionMenuSelection(inputNum);
+    }
+
+    // EFFECTS: directs user to correct position operation
+    private void positionMenuSelection(int selection) {
+        if (selection == 1) {
+            addPosition();
+        } else if (selection == 2) {
+            // removePosition();
+        } else if (selection == 3) {
+            // showAllPositions();
+        } else if (selection == 4) {
+            // selectPosition();
+        } else if (selection == 5) {
+            menu();
+        } else {
+            System.out.println("Not a valid selection.");
+            menu();
+        }
+    }
+
+    // EFFECTS: Asks user to enter employee name and creates Employee and puts into EmployeeRoster
+    private void addPosition() {
+        Scanner input = new Scanner(System.in);
+        Skill skill;
+        SkillsList skillsList;
+        System.out.println("Please enter the name of the Position you would like to add.");
+
+        String positionName = input.nextLine();
+
+        System.out.println("Please select the skill that you would like this position to require.");
+
+        skillsList = new SkillsList();
+        skillsList.qcSkillsList();
+        skillsListDisplay(skillsList);
+
+        inputNum = input.nextInt();
+        skill = skillsList.getSkill(inputNum);
+
+        Position position = new Position(positionName, skill);
+        positionList.addPosition(position);
+
+        System.out.println("Added " + positionName + " to list of positions.");
+
+        positionMenu();
     }
 
 }

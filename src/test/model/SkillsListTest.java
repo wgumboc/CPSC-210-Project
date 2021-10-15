@@ -28,6 +28,10 @@ public class SkillsListTest {
         skillsList.removeSkill(skill1);
 
         assertEquals(skill2, skillsList.getSkill(0));
+
+        skillsList.removeSkill(skill1);
+
+        assertEquals(skill2, skillsList.getSkill(0));
     }
 
     @Test
