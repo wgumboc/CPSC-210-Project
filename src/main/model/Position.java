@@ -5,11 +5,14 @@ public class Position {
     private String name;
     private Employee positionEmployee;
     private Skill requiredSkill;
+    private Boolean positionFull;
 
     //EFFECTS: Position has a given name and defaults to no employee filled
     public Position(String name, Skill requiredSkill) {
         this.name = name;
+        this.requiredSkill = requiredSkill;
         positionEmployee = null;
+        positionFull = false;
     }
 
     //EFFECTS: Returns position name.
@@ -23,6 +26,7 @@ public class Position {
             if (!employee.hasPosition()) {
                 this.positionEmployee = employee;
                 employee.giveAssignment();
+                positionFull = true;
                 return true;
             } else {
                 return false;
@@ -38,6 +42,7 @@ public class Position {
         } else {
             positionEmployee.removeAssignment();
             positionEmployee = null;
+            positionFull = false;
             return true;
         }
     }
@@ -45,6 +50,16 @@ public class Position {
     //EFFECTS: returns the employee who has filled the position
     public Employee getPositionEmployee() {
         return positionEmployee;
+    }
+
+    //EFFECTS: returns the skill required for the position
+    public Skill getPositionSkill() {
+        return requiredSkill;
+    }
+
+    //EFFECTS: returns true if position is filled already, false otherwise
+    public Boolean isFull() {
+        return positionFull;
     }
 
 }

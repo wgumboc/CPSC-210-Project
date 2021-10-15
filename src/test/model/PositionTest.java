@@ -29,6 +29,11 @@ class PositionTest {
     }
 
     @Test
+    public void testGetPositionSkill() {
+        assertEquals(skill1, position1.getPositionSkill());
+    }
+
+    @Test
     public void testFillPosition() {
         assertTrue(position1.fillPosition(employee1)); //position is open and employee has no position
         assertEquals(employee1, position1.getPositionEmployee()); //ensure correct employee is assigned to position
@@ -39,10 +44,20 @@ class PositionTest {
     @Test
     public void testRemovePosition() {
         position1.fillPosition(employee1);
+
         assertEquals(employee1, position1.getPositionEmployee());
         assertTrue(position1.removeEmployee());
         assertNull(position1.getPositionEmployee());
         assertFalse(position1.removeEmployee());
+    }
+
+    @Test
+    public void testIsFull() {
+        assertFalse(position1.isFull());
+
+        position1.fillPosition(employee1);
+
+        assertTrue(position1.isFull());
     }
 
 }

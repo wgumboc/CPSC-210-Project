@@ -60,4 +60,9 @@ public class SkillsList {
         }
     }
 
+    //EFFECTS: returns true if skill is in the list of employee's skills
+    public boolean hasSkill(Skill skill) {
+        return skillsList.contains(skill);
+    }
+
 }

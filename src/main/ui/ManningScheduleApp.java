@@ -7,14 +7,24 @@ import java.util.Scanner;
 public class ManningScheduleApp {
     private EmployeeRoster roster;
     private PositionList positionList;
+    private SkillsList qcDepSkills;
     private int inputNum;
 
+    // EFFECTS: initializes lists and brings up main menu
     public ManningScheduleApp() {
         createLists();
         menu();
     }
 
-    // Templated from stack overflow
+    // EFFECTS: creates lists
+    private void createLists() {
+        qcDepSkills = new SkillsList();
+        qcDepSkills.qcSkillsList();
+
+        roster = new EmployeeRoster();
+        positionList = new PositionList();
+    }
+
     // EFFECTS: lets user select menu
     private void menu() {
         Scanner userSelection = new Scanner(System.in);
@@ -29,11 +39,7 @@ public class ManningScheduleApp {
         menuSelection(inputNum);
     }
 
-    private void createLists() {
-        roster = new EmployeeRoster();
-        positionList = new PositionList();
-    }
-
+    // REQUIRES: selection is an integer
     // EFFECTS: directs user to correct menu
     private void menuSelection(int selection) {
         if (selection == 1) {
@@ -64,14 +70,15 @@ public class ManningScheduleApp {
         employeeMenuSelection(inputNum);
     }
 
+    // REQUIRES: selection is an integer
     // EFFECTS: directs user to correct employee operation
     private void employeeMenuSelection(int selection) {
         if (selection == 1) {
-            addEmployeeUI();
+            addEmployee();
         } else if (selection == 2) {
-            removeEmployeeUI();
+            removeEmployee();
         } else if (selection == 3) {
-            showAllEmployeesUI();
+            showAllEmployees();
         } else if (selection == 4) {
             selectEmployee();
         } else if (selection == 5) {
@@ -82,8 +89,9 @@ public class ManningScheduleApp {
         }
     }
 
+    // MODIFIES: roster
     // EFFECTS: Asks user to enter employee name and creates Employee and puts into EmployeeRoster
-    private void addEmployeeUI() {
+    private void addEmployee() {
         Scanner nameInput = new Scanner(System.in);
         System.out.println("Please enter the name of the employee you would like to add.");
 
@@ -97,8 +105,9 @@ public class ManningScheduleApp {
         employeeMenu();
     }
 
+    // MODIFIES: roster
     // EFFECTS: Removes an employee, specified by the user, from the roster
-    private void removeEmployeeUI() {
+    private void removeEmployee() {
         Scanner employeeNum = new Scanner(System.in);
         Employee eeToRemove;
 
@@ -125,7 +134,7 @@ public class ManningScheduleApp {
     }
 
     // EFFECTS: Displays all employees in the roster.
-    private void showAllEmployeesUI() {
+    private void showAllEmployees() {
         for (int i = 0; i < roster.rosterSize(); i++) {
             Employee employee = roster.getEmployee(i);
             System.out.println(employee.getEmployeeName());
@@ -160,6 +169,7 @@ public class ManningScheduleApp {
         employeeSelection(inputNum, employee);
     }
 
+    // REQUIRES: selection is an integer
     // EFFECTS: Directs the user to the appropriate action for the employee.
     private void employeeSelection(int selection, Employee employee) {
         if (selection == 1) {
@@ -176,30 +186,35 @@ public class ManningScheduleApp {
         }
     }
 
+    // MODIFIES: employeeSkills
     // EFFECTS: Adds a skill to an employee based on set skills.
     private void addSkill(Employee employee) {
         SkillsList employeeSkills;
         Skill skill;
         Scanner userSelection = new Scanner(System.in);
 
-        SkillsList skillsList = new SkillsList();
-        skillsList.qcSkillsList();
-
         System.out.println("Please select a skill to add to an employee");
-        skillsListDisplay(skillsList);
+        skillsListDisplay(qcDepSkills);
 
         inputNum = userSelection.nextInt();
 
-        skill = skillsList.getSkill(inputNum);
+        skill = qcDepSkills.getSkill(inputNum);
         employeeSkills = employee.getSkills();
-        employeeSkills.addSkill(skill);
 
-        System.out.println(skill.getSkillName() + " attributed to " + employee.getEmployeeName());
-        displaySkills(employee);
+        if (employeeSkills.hasSkill(skill)) {
+            System.out.println("Employee already has selected skill.");
+        } else {
+            employeeSkills.addSkill(skill);
+
+            System.out.println(skill.getSkillName() + " attributed to " + employee.getEmployeeName());
+            displaySkills(employee);
+        }
 
         employeeMenu();
     }
 
+    // MODIFIES: employeeSkills
+    // EFFECTS: Removes a specific skill of the employee
     private void removeSkill(Employee employee) {
         Scanner skillNum = new Scanner(System.in);
         Skill skillToRemove;
@@ -228,6 +243,7 @@ public class ManningScheduleApp {
         employeeMenu();
     }
 
+    // EFFECTS: Displays all of the employee's skills
     private void displaySkills(Employee employee) {
         SkillsList skillsList;
         Skill skill;
@@ -243,7 +259,7 @@ public class ManningScheduleApp {
         employeeMenu();
     }
 
-    // EFFECTS: initializes a skills list with pre-set skills for the Quality Department
+    // EFFECTS: displays all skills in the skillsList
     private void skillsListDisplay(SkillsList skillsList) {
         for (int i = 0; i < skillsList.skillsListSize(); i++) {
             Skill getSkill = skillsList.getSkill(i);
@@ -267,6 +283,7 @@ public class ManningScheduleApp {
         positionMenuSelection(inputNum);
     }
 
+    // REQUIRES: selection is an integer
     // EFFECTS: directs user to correct position operation
     private void positionMenuSelection(int selection) {
         if (selection == 1) {
@@ -285,23 +302,21 @@ public class ManningScheduleApp {
         }
     }
 
-    // EFFECTS: Asks user to enter employee name and creates Employee and puts into EmployeeRoster
+    // MODIFIES: positionList
+    // EFFECTS: Asks user to enter a position name and creates Position and puts into list of positions
     private void addPosition() {
         Scanner input = new Scanner(System.in);
         Skill skill;
-        SkillsList skillsList;
         System.out.println("Please enter the name of the Position you would like to add.");
 
         String positionName = input.nextLine();
 
         System.out.println("Please select the skill that you would like this position to require.");
-
-        skillsList = new SkillsList();
-        skillsList.qcSkillsList();
-        skillsListDisplay(skillsList);
+        
+        skillsListDisplay(qcDepSkills);
 
         inputNum = input.nextInt();
-        skill = skillsList.getSkill(inputNum);
+        skill = qcDepSkills.getSkill(inputNum);
 
         Position position = new Position(positionName, skill);
         positionList.addPosition(position);
@@ -311,6 +326,7 @@ public class ManningScheduleApp {
         positionMenu();
     }
 
+    // MODIFIES: positionList
     // EFFECTS: Removes a position from the list of positions.
     private void removePosition() {
         Scanner positionNum = new Scanner(System.in);
@@ -381,6 +397,7 @@ public class ManningScheduleApp {
         positionSelection(inputNum, position);
     }
 
+    // REQUIRES: selection is an integer
     // EFFECTS: Directs the user to the appropriate action for the position.
     private void positionSelection(int selection, Position position) {
         if (selection == 1) {
@@ -395,7 +412,7 @@ public class ManningScheduleApp {
         }
     }
 
-    // EFFECTS: Adds a skill to an employee based on set skills.
+    // EFFECTS: Gets the employee who the user wants to fill the position.
     private void fillPosition(Position position) {
         Scanner userSelection = new Scanner(System.in);
         Employee employee;
@@ -410,10 +427,22 @@ public class ManningScheduleApp {
         inputNum = userSelection.nextInt();
         employee = roster.getEmployee(inputNum);
 
+        assignPosition(position, employee);
+    }
+
+    // MODIFIES: positionEmployee
+    // EFFECTS: Fills the position with the employee if the position is open, the employee does not have a
+    //          current position, and the employee possess the correct skill.
+    private void assignPosition(Position position, Employee employee) {
+        SkillsList employeeSkills = employee.getSkills();
+        Skill positionSkill = position.getPositionSkill();
+
         if (employee.hasPosition()) {
             System.out.println(employee.getEmployeeName() + " already has a position.");
-        } else if (!position.fillPosition(employee)) {
+        } else if (position.isFull()) {
             System.out.println(position.getPositionName() + " is already filled.");
+        } else if (!(employeeSkills.hasSkill(positionSkill))) {
+            System.out.println(employee.getEmployeeName() + " does not have the right skills to fill this position.");
         } else {
             position.fillPosition(employee);
             System.out.println(employee.getEmployeeName() + " has been assigned to " + position.getPositionName());
@@ -422,6 +451,7 @@ public class ManningScheduleApp {
         positionMenu();
     }
 
+    // MODIFIES: positionEmployee
     // EFFECTS: Removes the assigned employee from the position.
     private void removeAssignment(Position position) {
         Employee posEmployee = position.getPositionEmployee();
