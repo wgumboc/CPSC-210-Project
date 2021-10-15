@@ -26,13 +26,13 @@ public class Employee {
         return hasPosition;
     }
 
-    // MODIFIES: hasPosition
+    // MODIFIES: this
     // EFFECTS: sets hasPosition to true if employee is assigned a position
     public void giveAssignment() {
         hasPosition = true;
     }
 
-    // MODIFIES: hasPosition
+    // MODIFIES: this
     // EFFECTS: sets hasPosition to true if employee's position is removed
     public void removeAssignment() {
         hasPosition = false;

@@ -20,7 +20,7 @@ public class Position {
         return name;
     }
 
-    // MODIFIES: positionEmployee
+    // MODIFIES: this
     // EFFECTS: Fills a position with an employee if the employee does not have a position.
     public Boolean fillPosition(Employee employee) {
         if (positionEmployee == null) {
@@ -36,7 +36,7 @@ public class Position {
         return false;
     }
 
-    // MODIFIES: positionEmployee
+    // MODIFIES: this
     // EFFECTS: Removes the employee assigned to the position.
     public Boolean removeEmployee() {
         if (positionEmployee == null) {

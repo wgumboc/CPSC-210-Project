@@ -22,13 +22,13 @@ public class PositionList {
         return allPositions.get(i);
     }
 
-    //MODIFIES: allPositions
+    //MODIFIES: this
     //EFFECTS: adds a position to the list
     public void addPosition(Position position) {
         allPositions.add(position);
     }
 
-    //MODIFIES: allPositions
+    //MODIFIES: this
     //EFFECTS: removes a position from the list
     public void removePosition(Position position) {
         for (int i = 0; i < allPositions.size(); i++) {

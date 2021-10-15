@@ -32,7 +32,7 @@ public class SkillsList {
         skillsList.addAll(temp);
     }
 
-    // MODIFIES: skillsList
+    // MODIFIES: this
     // EFFECTS: Adds a skill to the list of skills
     public void addSkill(Skill skill) {
         skillsList.add(skill);
@@ -49,7 +49,7 @@ public class SkillsList {
         return skillsList.get(i);
     }
 
-    //MODIFIES: skillsList
+    //MODIFIES: this
     //EFFECTS: removes a skill from the list of skills
     public void removeSkill(Skill skill) {
         for (int i = 0; i < skillsList.size(); i++) {

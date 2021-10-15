@@ -24,13 +24,13 @@ public class EmployeeRoster {
         return roster.get(i);
     }
 
-    // MODIFIES: roster
+    // MODIFIES: this
     // EFFECTS: adds an employee to the roster
     public void addEmployee(Employee employee) {
         roster.add(employee);
     }
 
-    // MODIFIES: roster
+    // MODIFIES: this
     // EFFECTS: removes an employee from the roster
     public void removeEmployee(Employee employee) {
         for (int i = 0; i < roster.size(); i++) {

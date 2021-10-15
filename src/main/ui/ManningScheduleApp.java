@@ -16,7 +16,8 @@ public class ManningScheduleApp {
         menu();
     }
 
-    // EFFECTS: creates lists
+    // MODIFIES: this
+    // EFFECTS: creates position, roster, and skills lists
     private void createLists() {
         qcDepSkills = new SkillsList();
         qcDepSkills.qcSkillsList();
@@ -25,7 +26,8 @@ public class ManningScheduleApp {
         positionList = new PositionList();
     }
 
-    // EFFECTS: lets user select menu
+    // MODIFIES: this
+    // EFFECTS: displays menu items to the user and prompts for input
     private void menu() {
         Scanner userSelection = new Scanner(System.in);
 
@@ -40,6 +42,7 @@ public class ManningScheduleApp {
     }
 
     // templated from https://stackoverflow.com/questions/3059333/validating-input-using-java-util-scanner
+    // MODIFIES: this
     // EFFECTS: scans for user input and rejects non-integers
     private int selectionScanning(Scanner scanner) {
         int num;
@@ -56,7 +59,8 @@ public class ManningScheduleApp {
         return num;
     }
 
-    // EFFECTS: directs user to correct menu
+    // MODIFIES: this
+    // EFFECTS: directs user to correct menu depending on user input
     private void menuSelection(int selection) {
         if (selection == 1) {
             employeeMenu();
@@ -70,7 +74,8 @@ public class ManningScheduleApp {
         }
     }
 
-    // EFFECTS: gives user options for employee
+    // MODIFIES: this
+    // EFFECTS: gives user options for employee, and prompts user for input
     private void employeeMenu() {
         Scanner userSelection = new Scanner(System.in);
 
@@ -86,6 +91,7 @@ public class ManningScheduleApp {
         employeeMenuSelection(inputNum);
     }
 
+    // MODIFIES: this
     // EFFECTS: directs user to correct employee operation
     private void employeeMenuSelection(int selection) {
         if (selection == 1) {
@@ -104,7 +110,7 @@ public class ManningScheduleApp {
         }
     }
 
-    // MODIFIES: roster
+    // MODIFIES: this
     // EFFECTS: Asks user to enter employee name and creates Employee and puts into EmployeeRoster
     private void addEmployee() {
         Scanner nameInput = new Scanner(System.in);
@@ -120,7 +126,8 @@ public class ManningScheduleApp {
         employeeMenu();
     }
 
-    // MODIFIES: roster
+    // REQUIRES: roster is not empty
+    // MODIFIES: this
     // EFFECTS: Removes an employee, specified by the user, from the roster
     private void removeEmployee() {
         Scanner employeeNum = new Scanner(System.in);
@@ -148,6 +155,7 @@ public class ManningScheduleApp {
         employeeMenu();
     }
 
+    // REQUIRES: roster is not empty
     // EFFECTS: Displays all employees in the roster.
     private void showAllEmployees() {
         for (int i = 0; i < roster.rosterSize(); i++) {
@@ -157,7 +165,9 @@ public class ManningScheduleApp {
         employeeMenu();
     }
 
-    // EFFECTS: Displays a menu with actions to act on an employee.
+    // REQUIRES: roster is not empty
+    // MODIFIES: this
+    // EFFECTS: Displays a menu with actions to act on an employee, and prompts user for input.
     private void selectEmployee() {
         Scanner userSelection = new Scanner(System.in);
         Employee employee;
@@ -185,7 +195,8 @@ public class ManningScheduleApp {
         employeeSelection(inputNum, employee);
     }
 
-    // EFFECTS: Directs the user to the appropriate action for the employee.
+    // MODIFIES: this
+    // EFFECTS: Directs the user to the appropriate action for the employee depending on user input.
     private void employeeSelection(int selection, Employee employee) {
         if (selection == 1) {
             addSkill(employee);
@@ -201,7 +212,7 @@ public class ManningScheduleApp {
         }
     }
 
-    // MODIFIES: employeeSkills
+    // MODIFIES: this
     // EFFECTS: Adds a skill to an employee based on set skills.
     private void addSkill(Employee employee) {
         SkillsList employeeSkills;
@@ -227,7 +238,8 @@ public class ManningScheduleApp {
         }
     }
 
-    // MODIFIES: employeeSkills
+    // REQUIRES: SkillList is not empty
+    // MODIFIES: this
     // EFFECTS: Removes a specific skill of the employee
     private void removeSkill(Employee employee) {
         Scanner skillNum = new Scanner(System.in);
@@ -257,7 +269,8 @@ public class ManningScheduleApp {
         employeeMenu();
     }
 
-    // EFFECTS: Displays all of the employee's skills
+    // REQUIRES: SkillList is not empty
+    // EFFECTS: Displays all the employee's skills
     private void displaySkills(Employee employee) {
         SkillsList skillsList;
         Skill skill;
@@ -273,6 +286,7 @@ public class ManningScheduleApp {
         employeeMenu();
     }
 
+    // REQUIRES: SkillList is not empty
     // EFFECTS: displays all skills in the skillsList
     private void skillsListDisplay(SkillsList skillsList) {
         for (int i = 0; i < skillsList.skillsListSize(); i++) {
@@ -281,7 +295,8 @@ public class ManningScheduleApp {
         }
     }
 
-    // EFFECTS: gives user options for position
+    // MODIFIES: this
+    // EFFECTS: gives user options to add/remove/show all/ or select positions and prompts user for input
     private void positionMenu() {
         Scanner userSelection = new Scanner(System.in);
 
@@ -297,7 +312,8 @@ public class ManningScheduleApp {
         positionMenuSelection(inputNum);
     }
 
-    // EFFECTS: directs user to correct position operation
+    // MODIFIES: this
+    // EFFECTS: directs user to correct position operation depending on user input
     private void positionMenuSelection(int selection) {
         if (selection == 1) {
             addPosition();
@@ -315,7 +331,7 @@ public class ManningScheduleApp {
         }
     }
 
-    // MODIFIES: positionList
+    // MODIFIES: this
     // EFFECTS: Asks user to enter a position name and creates Position and puts into list of positions
     private void addPosition() {
         Scanner input = new Scanner(System.in);
@@ -339,7 +355,8 @@ public class ManningScheduleApp {
         positionMenu();
     }
 
-    // MODIFIES: positionList
+    // REQUIRES: positionList is not empty
+    // MODIFIES: this
     // EFFECTS: Removes a position from the list of positions.
     private void removePosition() {
         Scanner positionNum = new Scanner(System.in);
@@ -367,6 +384,7 @@ public class ManningScheduleApp {
         positionMenu();
     }
 
+    // REQUIRES: positionList is not empty
     // EFFECTS: Displays all positions in the department.
     private void showAllPositions() {
         Position position;
@@ -384,7 +402,9 @@ public class ManningScheduleApp {
         positionMenu();
     }
 
-    // EFFECTS: Displays a menu with actions to act on a position.
+    // REQUIRES: positionList not empty
+    // MODIFIES: this
+    // EFFECTS: Displays a menu with actions to act on a position, and prompts user for input.
     private void selectPosition() {
         Scanner userSelection = new Scanner(System.in);
         Position position;
@@ -410,7 +430,8 @@ public class ManningScheduleApp {
         positionSelection(inputNum, position);
     }
 
-    // EFFECTS: Directs the user to the appropriate action for the position.
+    // MODIFIES: this
+    // EFFECTS: Directs the user to the appropriate action for the position depending on user input.
     private void positionSelection(int selection, Position position) {
         if (selection == 1) {
             fillPosition(position);
@@ -424,6 +445,7 @@ public class ManningScheduleApp {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: Gets the employee who the user wants to fill the position.
     private void fillPosition(Position position) {
         Scanner userSelection = new Scanner(System.in);
@@ -442,7 +464,7 @@ public class ManningScheduleApp {
         assignPosition(position, employee);
     }
 
-    // MODIFIES: positionEmployee
+    // MODIFIES: this
     // EFFECTS: Fills the position with the employee if the position is open, the employee does not have a
     //          current position, and the employee possess the correct skill.
     private void assignPosition(Position position, Employee employee) {
@@ -463,8 +485,8 @@ public class ManningScheduleApp {
         positionMenu();
     }
 
-    // MODIFIES: positionEmployee
-    // EFFECTS: Removes the assigned employee from the position.
+    // MODIFIES: this
+    // EFFECTS: Removes the assigned employee from the position if the position is not empty.
     private void removeAssignment(Position position) {
         Employee posEmployee = position.getPositionEmployee();
         if (!position.removeEmployee()) {
