@@ -1,21 +1,18 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.ArrayList;
 import java.util.List;
 
 // Represents an employee who has a name and a position status
 public class Employee {
     private String name;
     private Boolean hasPosition;
-    private List<Skill> skillsList;
+    private SkillsList employeeSkills;
 
     // EFFECTS: employee has given name and defaults to has no position
     public Employee(String name) {
         this.name = name;
         hasPosition = false;
-        skillsList = new ArrayList<>();
+        employeeSkills = new SkillsList();
     }
 
     // EFFECTS: returns case number
@@ -41,25 +38,8 @@ public class Employee {
     }
 
     // EFFECTS: returns the employee's list of skills
-    public List<Skill> getSkills() {
-        return skillsList;
-    }
-
-    // MODIFIES: skillsList
-    // EFFECTS: adds a skill to the employee's list of skills
-    public void addSkill(Skill skill) {
-        skillsList.add(skill);
-    }
-
-    // MODIFIES: skillsList
-    // EFFECTS: removes a skill from the employee's list of skills
-    public void removeSkill(Skill skill) {
-        for (int i = 0; i < skillsList.size(); i++) {
-            if (skillsList.get(i) == skill) {
-                skillsList.remove(i);
-                break;
-            }
-        }
+    public SkillsList getSkills() {
+        return employeeSkills;
     }
 
 }

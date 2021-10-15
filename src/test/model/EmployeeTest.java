@@ -36,30 +36,4 @@ class EmployeeTest {
         assertFalse(employee1.hasPosition());
     }
 
-    @Test
-    public void testAddRemoveSkill() {
-        List<Skill> skills = employee1.getSkills();
-        assertEquals(0, skills.size());
-
-        employee1.addSkill(skill1);
-        employee1.addSkill(skill2);
-
-        assertEquals(2, skills.size());
-        assertEquals(skill1, skills.get(0));
-        assertEquals(skill2, skills.get(1));
-
-        employee1.removeSkill(skill1);
-
-        assertEquals(1, skills.size());
-        assertEquals(skill2, skills.get(0));
-
-        employee1.removeSkill(skill1);
-
-        assertEquals(1, skills.size());
-
-        employee1.removeSkill(skill2);
-
-        assertEquals(0, skills.size());
-    }
-
 }
