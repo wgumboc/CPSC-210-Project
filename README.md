@@ -19,5 +19,7 @@ skills-position mismatch.
 - As a user, I want to be able to view all current positions, see if they are filled, and with whom.
 - As a user, I want to be able to add/remove people in those positions, and for the program to tell 
 me if they do not have the required skills for that position. 
+- As a user, I want to be able to save my positions, employees, skills, and assignments of each to file
+- As a user, I want to be given the option to load my positions, employees, skills, and assignments of each from file
 
 
