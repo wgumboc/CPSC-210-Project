@@ -6,7 +6,6 @@ import java.util.List;
 
 public class SkillsList {
     private List<Skill> skillsList;
-    private String skillName;
 
     // EFFECTS: Creates an empty list for the skills list.
     public SkillsList() {

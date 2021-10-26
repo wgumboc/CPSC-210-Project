@@ -9,6 +9,5 @@ public class MSJsonTest {
     protected void checkEmployee(String name, Boolean bl, SkillsList sl, Employee employee) {
         assertEquals(name, employee.getEmployeeName());
         assertEquals(bl, false);
-        assertEquals(sl, )
     }
 }

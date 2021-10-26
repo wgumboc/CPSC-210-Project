@@ -1,22 +1,61 @@
 {
+  "positions": [
+    {
+      "name": "AM Batcher",
+      "requiredSkill": {"skillName": "Cold Fill CSD" },
+      "position employee": {"name": "Jayden",
+        "hasPosition": "false",
+        "employeeSkills": {"skillsList" : [{"skillName": "Cold Fill CSD"}] } },
+      "positionFull": "false"
+    },
+    {
+      "name": "PM Batcher",
+      "requiredSkill": {"skillName": "Lead Hand" },
+      "position employee": "null",
+      "positionFull": "false"
+    },
+    {
+      "name": "GY Batcher",
+      "requiredSkill": {"skillName": "Line 5 Dole" },
+      "position employee": "null",
+      "positionFull": "false"
+    }
+  ],
   "employees": [
     {
-      "name": "Jayden"
+      "name": "Jayden",
+      "hasPosition": "false",
+      "employeeSkills": {"skillsList" : [{"skillName": "Cold Fill CSD"}] }
     },
     {
-      "name": "Kayden"
+      "name": "Kayden",
+      "hasPosition": "false",
+      "employeeSkills": {"skillsList" : [{"skillName": "Lead Hand" }] }
     },
     {
-      "name": "Hayden"
+      "name": "Hayden",
+      "hasPosition": "false",
+      "employeeSkills": {"skillsList" : [{"skillName": "Line 5 Dole" }] }
     },
     {
-      "name": "Aiden"
+      "name": "Aiden",
+      "hasPosition": "false",
+      "employeeSkills": {"skillsList" : [{"skillName": "Cold Fill CSD"}] }
     },
     {
-      "name": "Shaeden"
-    },
-    {
-      "name": "Cayden"
+      "name": "Shaeden",
+      "hasPosition": "false",
+      "employeeSkills": {"skillsList" : [{"skillName": "Cold Fill CSD"}] }
     }
-  ]
+  ],
+  "qcSkillsList": [{"skillName": "Cold Fill CSD"},
+    {"skillName": "Cold Fill Rockstar"},
+    {"skillName": "Line 5 Gatorade"},
+    {"skillName": "Line 5 Dole"},
+    {"skillName": "Line 5 Sobe"},
+    {"skillName": "CIP"},
+    {"skillName": "Sanitation - General"},
+    {"skillName": "Sanitation - Externals"},
+    {"skillName": "Microbiology Tech"},
+    {"skillName": "Lead Hand"}]
 }
