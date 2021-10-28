@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a position with a position name and a employee that fills it
 public class Position {
     private String name;
@@ -62,6 +64,15 @@ public class Position {
     //EFFECTS: returns true if position is filled already, false otherwise
     public Boolean isFull() {
         return positionFull;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("positionEmployee", positionEmployee);
+        json.put("requiredSkill", requiredSkill);
+        json.put("positionFull", positionFull);
+        return json;
     }
 
 }

@@ -11,12 +11,12 @@ import model.EmployeeRoster;
 import org.json.*;
 
 // All code below templated from JsonSerializationDemo
-public class MSJsonReader {
+public class RosterJsonReader {
     private String source;
 
     // ***Templated from JsonSerializationDemo***
     // EFFECTS: constructs reader to read from source file
-    public MSJsonReader(String source) {
+    public RosterJsonReader(String source) {
         this.source = source;
     }
 
@@ -52,8 +52,8 @@ public class MSJsonReader {
     // MODIFIES: er
     // EFFECTS: parses employees from JSON object and adds them to workroom
     private void addEmployees(EmployeeRoster er, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("employees");
-        for (Object json : jsonArray) {
+        JSONArray employees = jsonObject.getJSONArray("employees");
+        for (Object json : employees) {
             JSONObject nextEmployee = (JSONObject) json;
             addEmployee(er, nextEmployee);
         }
@@ -65,6 +65,11 @@ public class MSJsonReader {
     private void addEmployee(EmployeeRoster er, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         Employee employee = new Employee(name);
+
+        employee.setHasPosition(jsonObject.getBoolean("hasPosition"));
+
+        employee.setEmployeeID(jsonObject.getString("employeeID"));
+
         er.addEmployee(employee);
     }
 }

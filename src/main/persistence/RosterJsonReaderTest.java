@@ -6,12 +6,11 @@ import model.SkillsList;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class MSJsonReaderTest {
+public class RosterJsonReaderTest {
     protected void checkEmployee(String name, Boolean bl, Employee employee) {
         SkillsList skillsList;
         assertEquals(name, employee.getEmployeeName());
@@ -22,7 +21,7 @@ public class MSJsonReaderTest {
     // Templated from JsonSerializationDemo
     @Test
     void testReaderGeneralEmployeeList() {
-        MSJsonReader reader = new MSJsonReader("./data/testEmployeeRoster.json");
+        RosterJsonReader reader = new RosterJsonReader("./data/testEmployeeRoster.json");
         try {
             EmployeeRoster er = reader.read();
             assertEquals(5, er.rosterSize());

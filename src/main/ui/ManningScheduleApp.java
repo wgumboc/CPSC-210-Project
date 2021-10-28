@@ -1,17 +1,27 @@
 package ui;
 
 import model.*;
+import persistence.RosterJsonReader;
+import persistence.MSJsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ManningScheduleApp {
+    private static final String JSON_STORE = "./data/testWriter.json";
+    private static final String JSON_WRITE_STORE = "./data/testWriter.json";
     private EmployeeRoster roster;
     private PositionList positionList;
     private SkillsList qcDepSkills;
     private int inputNum;
+    private RosterJsonReader msJsonReader;
+    private MSJsonWriter msJsonWriter;
 
     // EFFECTS: initializes lists and brings up main menu
     public ManningScheduleApp() {
+        msJsonReader = new RosterJsonReader(JSON_STORE);
+        msJsonWriter = new MSJsonWriter(JSON_WRITE_STORE);
         createLists();
         menu();
     }
@@ -34,7 +44,9 @@ public class ManningScheduleApp {
         System.out.println("\n What would you like to do?");
         System.out.println("\t Press 1 to go to the employee menu.");
         System.out.println("\t Press 2 to go to the positions menu.");
-        System.out.println("\t Press 3 to exit.");
+        System.out.println("\t Press 3 to load schedule from file.");
+        System.out.println("\t Press 4 to save schedule to file.");
+        System.out.println("\t Press 5 to exit.");
 
         inputNum = selectionScanning(userSelection);
 
@@ -67,6 +79,10 @@ public class ManningScheduleApp {
         } else if (selection == 2) {
             positionMenu();
         } else if (selection == 3) {
+            loadSchedule();
+        } else if (selection == 4) {
+            saveSchedule();
+        } else if (selection == 5) {
             System.out.println("Goodbye");
         } else {
             System.out.println("Not a valid selection.");
@@ -160,7 +176,7 @@ public class ManningScheduleApp {
     private void showAllEmployees() {
         for (int i = 0; i < roster.rosterSize(); i++) {
             Employee employee = roster.getEmployee(i);
-            System.out.println(employee.getEmployeeName());
+            System.out.println(employee.getEmployeeName() + " - " + employee.getEmployeeID());
         }
         employeeMenu();
     }
@@ -497,6 +513,34 @@ public class ManningScheduleApp {
         }
 
         positionMenu();
+    }
+
+    // templated from JsonSerializationDemo
+    // EFFECTS: saves the workroom to file
+    private void saveSchedule() {
+        try {
+            msJsonWriter.open();
+            msJsonWriter.write(roster);
+            msJsonWriter.write(positionList);
+            msJsonWriter.close();
+            System.out.println("Saved to " + JSON_WRITE_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_WRITE_STORE);
+        }
+        menu();
+    }
+
+    // templated from JsonSerializationDemo
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadSchedule() {
+        try {
+            roster = msJsonReader.read();
+            System.out.println("Loaded schedule from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+        menu();
     }
 
 }

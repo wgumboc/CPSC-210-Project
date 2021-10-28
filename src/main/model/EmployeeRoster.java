@@ -1,12 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents the employee roster of the department with maximum size MAX_SIZE
-public class EmployeeRoster {
+public class EmployeeRoster implements Writable {
     private List<Employee> roster;
-    public static final int MAX_SIZE = 100;
 
     //EFFECTS: Creates an empty list for the roster
     public EmployeeRoster() {
@@ -39,6 +42,24 @@ public class EmployeeRoster {
                 break;
             }
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("employees", employeesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray employeesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Employee e : roster) {
+            jsonArray.put(e.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

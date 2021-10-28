@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 public class Skill {
     private String skillName;
 
@@ -11,6 +13,12 @@ public class Skill {
     // EFFECTS: returns the name of the skill
     public String getSkillName() {
         return skillName;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("skillName", skillName);
+        return json;
     }
 
 }

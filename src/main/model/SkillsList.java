@@ -42,6 +42,11 @@ public class SkillsList {
         return skillsList.size();
     }
 
+    // EFFECTS: Returns the entire list of skills
+    public List<Skill> getList() {
+        return skillsList;
+    }
+
     // REQUIRES: 0 <= i <= size of skillsList
     // EFFECTS: Returns a skill from the list of skills at index i.
     public Skill getSkill(int i) {
