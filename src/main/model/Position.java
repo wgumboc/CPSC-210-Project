@@ -2,6 +2,8 @@ package model;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 // Represents a position with a position name and a employee that fills it
 public class Position {
     private String name;
@@ -39,6 +41,26 @@ public class Position {
     }
 
     // MODIFIES: this
+    // EFFECTS: Sets positionFull to the boolean passed
+    public void setPositionFull(Boolean b) {
+        positionFull = b;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Sets positionEmployee to the employee whose ID matches the ID passed
+    public void setPositionEmployee(EmployeeRoster er, String s) {
+        String id;
+        List<Employee> roster = er.getRoster();
+
+        for (Employee e: roster) {
+            id = e.getEmployeeID();
+            if (id.equals(s)) {
+                positionEmployee = e;
+            }
+        }
+    }
+
+    // MODIFIES: this
     // EFFECTS: Removes the employee assigned to the position.
     public Boolean removeEmployee() {
         if (positionEmployee == null) {
@@ -68,9 +90,17 @@ public class Position {
 
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        String id;
+
+        if (positionEmployee == null) {
+            id = "null";
+        } else {
+            id = positionEmployee.getEmployeeID();
+        }
+
         json.put("name", name);
-        json.put("positionEmployee", positionEmployee);
-        json.put("requiredSkill", requiredSkill);
+        json.put("positionEmployee", id);
+        json.put("requiredSkill", requiredSkill.getSkillName());
         json.put("positionFull", positionFull);
         return json;
     }

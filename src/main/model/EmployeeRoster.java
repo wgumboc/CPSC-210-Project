@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Represents the employee roster of the department with maximum size MAX_SIZE
-public class EmployeeRoster implements Writable {
+public class EmployeeRoster {
     private List<Employee> roster;
 
     //EFFECTS: Creates an empty list for the roster
@@ -19,6 +19,11 @@ public class EmployeeRoster implements Writable {
     //EFFECTS: returns the number of employees in the roster
     public int rosterSize() {
         return roster.size();
+    }
+
+    //EFFECTS: returns the roster list
+    public List<Employee> getRoster() {
+        return roster;
     }
 
     // REQUIRES: 0 <= i <= size of roster
@@ -42,24 +47,6 @@ public class EmployeeRoster implements Writable {
                 break;
             }
         }
-    }
-
-    @Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("employees", employeesToJson());
-        return json;
-    }
-
-    // EFFECTS: returns things in this workroom as a JSON array
-    private JSONArray employeesToJson() {
-        JSONArray jsonArray = new JSONArray();
-
-        for (Employee e : roster) {
-            jsonArray.put(e.toJson());
-        }
-
-        return jsonArray;
     }
 
 }

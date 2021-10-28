@@ -15,6 +15,11 @@ public class PositionList {
         allPositions = new ArrayList<>();
     }
 
+    //EFFECTS: returns the list of positions
+    public List<Position> getAllPositions() {
+        return allPositions;
+    }
+
     //EFFECTS: returns the number of positions in the list
     public int positionListSize() {
         return allPositions.size();

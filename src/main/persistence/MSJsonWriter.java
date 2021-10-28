@@ -2,6 +2,7 @@ package persistence;
 
 import model.EmployeeRoster;
 import model.PositionList;
+import model.Schedule;
 import org.json.JSONObject;
 
 
@@ -24,20 +25,13 @@ public class MSJsonWriter {
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
     // be opened for writing
     public void open() throws FileNotFoundException {
-        writer = new PrintWriter(new File(destination));
+        writer = new PrintWriter(destination);
     }
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of workroom to file
-    public void write(EmployeeRoster er) {
-        JSONObject json = er.toJson();
-        saveToFile(json.toString(TAB));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
-    public void write(PositionList pl) {
-        JSONObject json = pl.toJson();
+    public void write(Schedule sch) {
+        JSONObject json = sch.toJson();
         saveToFile(json.toString(TAB));
     }
 

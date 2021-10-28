@@ -1,7 +1,7 @@
 package ui;
 
 import model.*;
-import persistence.RosterJsonReader;
+import persistence.MSJsonReader;
 import persistence.MSJsonWriter;
 
 import java.io.FileNotFoundException;
@@ -11,16 +11,17 @@ import java.util.Scanner;
 public class ManningScheduleApp {
     private static final String JSON_STORE = "./data/testWriter.json";
     private static final String JSON_WRITE_STORE = "./data/testWriter.json";
+    private Schedule schedule;
     private EmployeeRoster roster;
     private PositionList positionList;
     private SkillsList qcDepSkills;
     private int inputNum;
-    private RosterJsonReader msJsonReader;
+    private MSJsonReader msJsonReader;
     private MSJsonWriter msJsonWriter;
 
     // EFFECTS: initializes lists and brings up main menu
     public ManningScheduleApp() {
-        msJsonReader = new RosterJsonReader(JSON_STORE);
+        msJsonReader = new MSJsonReader(JSON_STORE);
         msJsonWriter = new MSJsonWriter(JSON_WRITE_STORE);
         createLists();
         menu();
@@ -29,11 +30,10 @@ public class ManningScheduleApp {
     // MODIFIES: this
     // EFFECTS: creates position, roster, and skills lists
     private void createLists() {
-        qcDepSkills = new SkillsList();
-        qcDepSkills.qcSkillsList();
-
-        roster = new EmployeeRoster();
-        positionList = new PositionList();
+        schedule = new Schedule();
+        roster = schedule.getRoster();
+        positionList = schedule.getPositionList();
+        qcDepSkills = schedule.getQCSkillsList();
     }
 
     // MODIFIES: this
@@ -520,8 +520,7 @@ public class ManningScheduleApp {
     private void saveSchedule() {
         try {
             msJsonWriter.open();
-            msJsonWriter.write(roster);
-            msJsonWriter.write(positionList);
+            msJsonWriter.write(schedule);
             msJsonWriter.close();
             System.out.println("Saved to " + JSON_WRITE_STORE);
         } catch (FileNotFoundException e) {
@@ -535,7 +534,9 @@ public class ManningScheduleApp {
     // EFFECTS: loads workroom from file
     private void loadSchedule() {
         try {
-            roster = msJsonReader.read();
+            schedule = msJsonReader.read();
+            roster = schedule.getRoster();
+            positionList = schedule.getPositionList();
             System.out.println("Loaded schedule from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
