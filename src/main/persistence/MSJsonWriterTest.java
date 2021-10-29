@@ -43,8 +43,13 @@ public class MSJsonWriterTest {
             er = schedule.getRoster();
 
             List<Employee> roster = er.getRoster();
+            Employee employee0 = er.getEmployee(0);
+            SkillsList sl = employee0.getSkills();
+            sl.addSkill(new Skill("Rockstar"));
+
             assertEquals("Jason", er.getEmployee(0).getEmployeeName());
             assertEquals("Jackson", er.getEmployee(1).getEmployeeName());
+            assertEquals("Rockstar", sl.getSkill(0).getSkillName());
             assertEquals(2, roster.size());
 
         } catch (IOException e) {
