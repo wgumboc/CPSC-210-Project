@@ -10,26 +10,25 @@ import java.util.stream.Stream;
 import model.*;
 import org.json.*;
 
-// All code below templated from JsonSerializationDemo
+// ***Methods templated from JsonSerializationDemo***
 public class MSJsonReader {
     private String source;
 
-    // ***Templated from JsonSerializationDemo***
     // EFFECTS: constructs reader to read from source file
     public MSJsonReader(String source) {
         this.source = source;
     }
 
-    // ***Templated from JsonSerializationDemo***
-    // EFFECTS: reads EmployeeRoster from file and returns it;
-    // throws IOException if an error occurs reading data from file
+    // ***copied from JsonSerializationDemo***
+    // EFFECTS: reads schedule from file and returns it;
+    //          throws IOException if an error occurs reading data from file
     public Schedule read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseSchedule(jsonObject);
     }
 
-    // ***Copied from JsonSerializationDemo***
+    // ***copied from JsonSerializationDemo***
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
@@ -41,8 +40,7 @@ public class MSJsonReader {
         return contentBuilder.toString();
     }
 
-    // ***Templated from JsonSerializationDemo***
-    // EFFECTS: parses (convert string to Json object) Schedule from JSON object and returns it
+    // EFFECTS: parses schedule from JSON object and returns it
     private Schedule parseSchedule(JSONObject jsonObject) {
         Schedule schedule = new Schedule();
 
@@ -56,8 +54,8 @@ public class MSJsonReader {
         return schedule;
     }
 
-    // MODIFIES: er
-    // EFFECTS: parses employees from JSON object and adds them to workroom
+    // MODIFIES: schedule
+    // EFFECTS: parses EmployeeRoster from JSON object and adds to Schedule
     private void addEmployees(EmployeeRoster er, SkillsList sl, JSONObject jsonObject) {
         JSONArray employees = jsonObject.getJSONArray("employees");
         for (Object json : employees) {
@@ -66,9 +64,8 @@ public class MSJsonReader {
         }
     }
 
-    // ***Templated from JsonSerializationDemo***
     // MODIFIES: er
-    // EFFECTS: parses Employee from JSON object and adds it to workroom
+    // EFFECTS: parses Employee from JSON object and adds to EmployeeRoster
     private void addEmployee(EmployeeRoster er, SkillsList sl, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         Employee employee = new Employee(name);
@@ -86,9 +83,8 @@ public class MSJsonReader {
         er.addEmployee(employee);
     }
 
-    // ***Templated from JsonSerializationDemo***
-    // MODIFIES: er
-    // EFFECTS: parses Employee from JSON object and adds it to workroom
+    // MODIFIES: employee
+    // EFFECTS: parses Skill from JSON object and adds to Employee
     private void addSkills(Employee employee, SkillsList sl, JSONObject jsonObject) {
         String skillName = jsonObject.getString("skillName");
         List<Skill> skills = sl.getList();
@@ -101,8 +97,8 @@ public class MSJsonReader {
         }
     }
 
-    // MODIFIES: er
-    // EFFECTS: parses employees from JSON object and adds them to workroom
+    // MODIFIES: schedule
+    // EFFECTS: parses PositionList from JSON object and adds to Schedule
     private void addPositions(PositionList pl, SkillsList sl, EmployeeRoster er, JSONObject jsonObject) {
         JSONArray positions = jsonObject.getJSONArray("positions");
         for (Object json : positions) {
@@ -111,9 +107,8 @@ public class MSJsonReader {
         }
     }
 
-    // ***Templated from JsonSerializationDemo***
     // MODIFIES: pl
-    // EFFECTS: parses Employee from JSON object and adds it to workroom
+    // EFFECTS: parses Position from JSON object and adds to PositionList
     private void addPosition(PositionList pl, SkillsList sl, EmployeeRoster er, JSONObject jsonObject) {
         Skill posSkill = null;
         List<Skill> skills = sl.getList();

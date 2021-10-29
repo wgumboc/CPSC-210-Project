@@ -94,6 +94,7 @@ public class Position {
         return positionFull;
     }
 
+    // EFFECTS: returns this fields as Json objects
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         String id;

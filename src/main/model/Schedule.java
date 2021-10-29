@@ -32,6 +32,7 @@ public class Schedule {
         return qcSkillsList;
     }
 
+    // EFFECTS: returns this fields as Json objects
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("employees", employeesToJson());

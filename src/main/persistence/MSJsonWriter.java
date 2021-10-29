@@ -8,9 +8,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 
-// templated from JsonSerializationDemo
-// Represents a writer that writes JSON representation of workroom to file
-
+// ***Methods templated from JsonSerializationDemo***
 public class MSJsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
@@ -23,7 +21,7 @@ public class MSJsonWriter {
 
     // MODIFIES: this
     // EFFECTS: opens writer; throws FileNotFoundException if destination file cannot
-    // be opened for writing
+    //          be opened for writing
     public void open() throws FileNotFoundException {
         writer = new PrintWriter(destination);
     }

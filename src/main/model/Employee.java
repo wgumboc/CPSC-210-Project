@@ -2,13 +2,12 @@ package model;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import persistence.Writable;
 
 import java.util.List;
 import java.util.UUID;
 
 // Represents an employee who has a name and a position status
-public class Employee implements Writable {
+public class Employee {
     private String name;
     private Boolean hasPosition;
     private SkillsList employeeSkills;
@@ -33,11 +32,13 @@ public class Employee implements Writable {
         return employeeID;
     }
 
+    // MODIFIES: this
     // EFFECTS: sets the employee id to what user specifies
     public void setEmployeeID(String id) {
         employeeID = id;
     }
 
+    // MODIFIES: this
     // EFFECTS: manually sets if the employee has a position
     public void setHasPosition(Boolean b) {
         hasPosition = b;
@@ -65,6 +66,7 @@ public class Employee implements Writable {
         return employeeSkills;
     }
 
+    // EFFECTS: returns this fields as Json objects
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", name);

@@ -1,0 +1,17 @@
+{
+    "positions": [],
+    "employees": [
+        {
+            "employeeSkills": [{"skillName": "Rockstar"}],
+            "hasPosition": false,
+            "name": "Jason",
+            "employeeID": "9884cd6c-e6d0-4c07-a9fb-b29c1cce7ac8"
+        },
+        {
+            "employeeSkills": [],
+            "hasPosition": false,
+            "name": "Jackson",
+            "employeeID": "0d4cd446-3307-4ab8-a705-23e610117764"
+        }
+    ]
+}

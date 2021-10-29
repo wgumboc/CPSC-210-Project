@@ -15,6 +15,7 @@ public class Skill {
         return skillName;
     }
 
+    // EFFECTS: returns this fields as Json objects
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("skillName", skillName);

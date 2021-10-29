@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ManningScheduleApp {
-    private static final String JSON_STORE = "./data/testWriter.json";
-    private static final String JSON_WRITE_STORE = "./data/testWriter.json";
+    private static final String JSON_STORE = "./data/scheduleData.json";
+    private static final String JSON_WRITE_STORE = "./data/scheduleData.json";
     private Schedule schedule;
     private EmployeeRoster roster;
     private PositionList positionList;
