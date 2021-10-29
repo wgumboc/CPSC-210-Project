@@ -24,14 +24,38 @@ public class MSJsonWriterTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriteEmployees() {
         try {
             Schedule schedule = new Schedule();
             EmployeeRoster er = schedule.getRoster();
-            PositionList pl = schedule.getPositionList();
 
             er.addEmployee(new Employee("Jason"));
             er.addEmployee(new Employee("Jackson"));
+
+            MSJsonWriter writer = new MSJsonWriter("./data/testWriterSchedule.json");
+            writer.open();
+            writer.write(schedule);
+            writer.close();
+
+            MSJsonReader reader = new MSJsonReader("./data/testWriterSchedule.json");
+            schedule = reader.read();
+            er = schedule.getRoster();
+
+            List<Employee> roster = er.getRoster();
+            assertEquals("Jason", er.getEmployee(0).getEmployeeName());
+            assertEquals("Jackson", er.getEmployee(1).getEmployeeName());
+            assertEquals(2, roster.size());
+
+        } catch (IOException e) {
+            fail("Exception should not have been thrown");
+        }
+    }
+
+    @Test
+    void testWritePositions() {
+        try {
+            Schedule schedule = new Schedule();
+            PositionList pl = schedule.getPositionList();
 
             pl.addPosition(new Position("AM Batcher", new Skill("Rockstar")));
             pl.addPosition(new Position("AM Line 5", new Skill("Gatorade")));
@@ -43,13 +67,7 @@ public class MSJsonWriterTest {
 
             MSJsonReader reader = new MSJsonReader("./data/testWriterSchedule.json");
             schedule = reader.read();
-            er = schedule.getRoster();
             pl = schedule.getPositionList();
-
-            List<Employee> roster = er.getRoster();
-            assertEquals("Jason", er.getEmployee(0).getEmployeeName());
-            assertEquals("Jackson", er.getEmployee(1).getEmployeeName());
-            assertEquals(2, roster.size());
 
             List<Position> positionList = pl.getAllPositions();
             assertEquals("AM Batcher", pl.getPosition(0).getPositionName());
@@ -60,4 +78,5 @@ public class MSJsonWriterTest {
             fail("Exception should not have been thrown");
         }
     }
+
 }
