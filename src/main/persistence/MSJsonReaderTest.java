@@ -22,10 +22,22 @@ public class MSJsonReaderTest {
         }
     }
 
-    protected void checkPosition(String name, Boolean bl, String skill, Position position) {
+    protected void checkPosition(String name, Boolean bl, String skill, String employeeID,
+                                 Position position, EmployeeRoster er) {
+        Employee positionEmployee = null;
+        String id;
+
+        for (Employee e: er.getRoster()) {
+            id = e.getEmployeeID();
+            if (id.equals(employeeID)) {
+                positionEmployee = e;
+            }
+        }
+
         assertEquals(name, position.getPositionName());
         assertEquals(bl, position.isFull());
         assertEquals(skill, position.getPositionSkill().getSkillName());
+        assertEquals(positionEmployee, position.getPositionEmployee());
     }
 
     @Test
@@ -74,10 +86,12 @@ public class MSJsonReaderTest {
         try {
             Schedule sch = reader.read();
             PositionList pl = sch.getPositionList();
+            EmployeeRoster er = sch.getRoster();
 
             assertEquals(2, pl.positionListSize());
 
-            checkPosition("AM Rockstar Batcher", true, "Cold Fill CSD", pl.getPosition(0));
+            checkPosition("AM Rockstar Batcher", true, "Cold Fill CSD",
+                    "451cd678-e10f-4b73-9753-3835fb24eb8d", pl.getPosition(0), er);
 
         } catch (IOException e) {
             fail("Couldn't read from file");
