@@ -99,18 +99,6 @@ public class MSJsonReader {
                 employeeSkills.addSkill(s);
             }
         }
-
-//        employee.setHasPosition(jsonObject.getBoolean("hasPosition"));
-//
-//        employee.setEmployeeID(jsonObject.getString("employeeID"));
-//
-//        JSONArray skillsList = jsonObject.getJSONArray("employeeSkills");
-//        for (Object json : skillsList) {
-//            JSONObject nextSkill = (JSONObject) json;
-//            addSkills(er, Skill);
-//        }
-//
-//        er.addEmployee(employee);
     }
 
     // MODIFIES: er

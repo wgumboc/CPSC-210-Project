@@ -41,8 +41,9 @@ public class MSJsonReaderTest {
     @Test
     void testReaderNonExistentFile() {
         MSJsonReader reader = new MSJsonReader("./data/invalid.json");
+        Schedule sch;
         try {
-            Schedule sch = reader.read();
+            sch = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -53,10 +54,13 @@ public class MSJsonReaderTest {
     @Test
     void testReadEmployees() {
         MSJsonReader reader = new MSJsonReader("./data/jsonTestData.json");
+        Schedule sch;
+        EmployeeRoster er;
+        SkillsList qcSkills;
         try {
-            Schedule sch = reader.read();
-            EmployeeRoster er = sch.getRoster();
-            SkillsList qcSkills = new SkillsList();
+            sch = reader.read();
+            er = sch.getRoster();
+            qcSkills = new SkillsList();
             qcSkills.qcSkillsList();
             List<Skill> mattSkills = new ArrayList<>();
             List<Skill> kaylaSkills = new ArrayList<>();
@@ -81,10 +85,13 @@ public class MSJsonReaderTest {
     @Test
     void testReadPositions() {
         MSJsonReader reader = new MSJsonReader("./data/jsonTestData.json");
+        Schedule sch;
+        PositionList pl;
+        EmployeeRoster er;
         try {
-            Schedule sch = reader.read();
-            PositionList pl = sch.getPositionList();
-            EmployeeRoster er = sch.getRoster();
+            sch = reader.read();
+            pl = sch.getPositionList();
+            er = sch.getRoster();
 
             assertEquals(2, pl.positionListSize());
 
