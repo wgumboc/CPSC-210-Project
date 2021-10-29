@@ -516,6 +516,7 @@ public class ManningScheduleApp {
     }
 
     // templated from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: saves the workroom to file
     private void saveSchedule() {
         try {
@@ -530,6 +531,7 @@ public class ManningScheduleApp {
     }
 
     // templated from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // MODIFIES: this
     // EFFECTS: loads workroom from file
     private void loadSchedule() {

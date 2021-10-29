@@ -11,6 +11,7 @@ import model.*;
 import org.json.*;
 
 // ***Methods templated from JsonSerializationDemo***
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class MSJsonReader {
     private String source;
 

@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 // Templated from JsonSerializationDemo
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 public class MSJsonReaderTest {
     protected void checkEmployee(String name, Boolean bl, String id, List<Skill> sk, Employee employee) {
         assertEquals(name, employee.getEmployeeName());
