@@ -16,7 +16,8 @@ public class MSJsonWriterTest {
     @Test
     void testWriterInvalidFile() {
         try {
-            MSJsonWriter writer = new MSJsonWriter("./data/invalid.json");
+            Schedule schedule = new Schedule();
+            MSJsonWriter writer = new MSJsonWriter("./data/inval\0$id.json");
             writer.open();
             fail("IOException was expected");
         } catch (IOException e) {
@@ -32,6 +33,9 @@ public class MSJsonWriterTest {
 
             er.addEmployee(new Employee("Jason"));
             er.addEmployee(new Employee("Jackson"));
+            Employee employee0 = er.getEmployee(0);
+            SkillsList sl = employee0.getSkills();
+            sl.addSkill(new Skill("Rockstar"));
 
             MSJsonWriter writer = new MSJsonWriter("./data/testWriterSchedule.json");
             writer.open();
@@ -43,9 +47,6 @@ public class MSJsonWriterTest {
             er = schedule.getRoster();
 
             List<Employee> roster = er.getRoster();
-            Employee employee0 = er.getEmployee(0);
-            SkillsList sl = employee0.getSkills();
-            sl.addSkill(new Skill("Rockstar"));
 
             assertEquals("Jason", er.getEmployee(0).getEmployeeName());
             assertEquals("Jackson", er.getEmployee(1).getEmployeeName());
