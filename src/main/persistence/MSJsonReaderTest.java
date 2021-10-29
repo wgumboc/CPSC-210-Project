@@ -15,10 +15,8 @@ public class MSJsonReaderTest {
         assertEquals(name, employee.getEmployeeName());
         assertEquals(bl, employee.hasPosition());
         assertEquals(id, employee.getEmployeeID());
-        if (sk != null) {
-            for (int i = 0; i < sk.size(); i++) {
-                assertEquals(sk.get(i).getSkillName(), employee.getSkills().getSkill(i).getSkillName());
-            }
+        for (int i = 0; i < sk.size(); i++) {
+            assertEquals(sk.get(i).getSkillName(), employee.getSkills().getSkill(i).getSkillName());
         }
     }
 
