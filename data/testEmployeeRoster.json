@@ -1,56 +1,34 @@
 {
   "positions": [
     {
-      "name": "AM Batcher",
-      "requiredSkill": {"skillName": "Cold Fill CSD" },
-      "position employee": {"name": "Jayden",
-        "hasPosition": "false",
-        "employeeSkills": {"skillsList" : [{"skillName": "Cold Fill CSD"}] } },
-      "positionFull": "false"
+      "name": "AM Rockstar Batcher",
+      "positionFull": true,
+      "requiredSkill": "Cold Fill CSD",
+      "positionEmployee": "451cd678-e10f-4b73-9753-3835fb24eb8d"
     },
     {
-      "name": "PM Batcher",
-      "requiredSkill": {"skillName": "Lead Hand" },
-      "position employee": "null",
-      "positionFull": "false"
-    },
-    {
-      "name": "GY Batcher",
-      "requiredSkill": {"skillName": "Line 5 Dole" },
-      "position employee": "null",
-      "positionFull": "false"
+      "name": "PM Rockstar Batcher",
+      "positionFull": false,
+      "requiredSkill": "Cold Fill Rockstar",
+      "positionEmployee": "null"
     }
   ],
   "employees": [
     {
-      "name": "Jayden",
-      "hasPosition": "false",
-      "employeeSkills": [{"skillName": "Cold Fill CSD"}, {"skillName": "Lead Hand"}],
-      "employeeID": "38400000-8cf0-11bd-b23e-10b96e4ef00d"
+      "employeeSkills": [
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Cold Fill Rockstar"},
+        {"skillName": "Line 5 Gatorade"}
+      ],
+      "hasPosition": true,
+      "name": "Matt",
+      "employeeID": "451cd678-e10f-4b73-9753-3835fb24eb8d"
     },
     {
-      "name": "Kayden",
-      "hasPosition": "false",
-      "employeeSkills": [{"skillName": "Lead Hand" }],
-      "employeeID": "c1b5fdd4-37c7-11ec-8d3d-0242ac130003"
-    },
-    {
-      "name": "Hayden",
-      "hasPosition": "false",
-      "employeeSkills": [{"skillName": "Line 5 Dole" }],
-      "employeeID": "d82eb718-37c7-11ec-8d3d-0242ac130003"
-    },
-    {
-      "name": "Aiden",
-      "hasPosition": "false",
-      "employeeSkills": [{"skillName": "Cold Fill CSD"}],
-      "employeeID": "dca35f6a-37c7-11ec-8d3d-0242ac130003"
-    },
-    {
-      "name": "Shaeden",
-      "hasPosition": "false",
-      "employeeSkills": [{"skillName": "Cold Fill CSD"}],
-      "employeeID": "e0ac72c2-37c7-11ec-8d3d-0242ac130003"
+      "employeeSkills": [],
+      "hasPosition": false,
+      "name": "Kayla",
+      "employeeID": "3143d5e2-9237-40b2-a2ea-cb4f52bf3503"
     }
   ]
 }
