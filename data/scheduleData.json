@@ -47,6 +47,12 @@
             "hasPosition": false,
             "name": "Timon",
             "employeeID": "b154b33c-9e20-418c-b975-8929c9fb5927"
+        },
+        {
+            "employeeSkills": [],
+            "hasPosition": false,
+            "name": "Patrice",
+            "employeeID": "c5184667-b159-4883-9675-6ac11efaeb2b"
         }
     ]
 }

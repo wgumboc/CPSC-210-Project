@@ -176,7 +176,7 @@ public class ManningScheduleApp {
     private void showAllEmployees() {
         for (int i = 0; i < roster.rosterSize(); i++) {
             Employee employee = roster.getEmployee(i);
-            System.out.println(employee.getEmployeeName() + " - " + employee.getEmployeeID());
+            System.out.println(employee.getEmployeeName());
         }
         employeeMenu();
     }
