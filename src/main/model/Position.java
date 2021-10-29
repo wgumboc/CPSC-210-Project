@@ -61,6 +61,12 @@ public class Position {
     }
 
     // MODIFIES: this
+    // EFFECTS: Sets positionEmployee to a given employee
+    public void setPositionEmployee(Employee employee) {
+        positionEmployee = employee;
+    }
+
+    // MODIFIES: this
     // EFFECTS: Removes the employee assigned to the position.
     public Boolean removeEmployee() {
         if (positionEmployee == null) {

@@ -46,22 +46,4 @@ public class PositionList {
             }
         }
     }
-
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("positions", positionsToJson());
-        return json;
-    }
-
-    // EFFECTS: returns things in this workroom as a JSON array
-    private JSONArray positionsToJson() {
-        JSONArray jsonArray = new JSONArray();
-
-        for (Position p : allPositions) {
-            jsonArray.put(p.toJson());
-        }
-
-        return jsonArray;
-    }
-
 }

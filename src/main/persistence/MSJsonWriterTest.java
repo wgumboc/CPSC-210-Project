@@ -1,6 +1,7 @@
 package persistence;
 
 import model.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 //Templated from jsonSerializationDemo
 public class MSJsonWriterTest {
+
     @Test
     void testWriterInvalidFile() {
         try {
-            Schedule schedule = new Schedule();
             MSJsonWriter writer = new MSJsonWriter("./data/invalid.json");
             writer.open();
             fail("IOException was expected");
@@ -60,6 +61,9 @@ public class MSJsonWriterTest {
             pl.addPosition(new Position("AM Batcher", new Skill("Rockstar")));
             pl.addPosition(new Position("AM Line 5", new Skill("Gatorade")));
 
+            Position p = pl.getPosition(0);
+            p.setPositionEmployee(new Employee("Jack"));
+
             MSJsonWriter writer = new MSJsonWriter("./data/testWriterSchedule.json");
             writer.open();
             writer.write(schedule);
@@ -71,6 +75,7 @@ public class MSJsonWriterTest {
 
             List<Position> positionList = pl.getAllPositions();
             assertEquals("AM Batcher", pl.getPosition(0).getPositionName());
+            assertEquals("Jack", p.getPositionEmployee().getEmployeeName());
             assertEquals("AM Line 5", pl.getPosition(1).getPositionName());
             assertEquals(2, positionList.size());
 
