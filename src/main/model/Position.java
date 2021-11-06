@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-// Represents a position with a position name and a employee that fills it
+// Represents a position with a position name and an employee that fills it
 public class Position {
     private String name;
     private Employee positionEmployee;

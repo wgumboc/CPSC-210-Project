@@ -1,58 +1,9 @@
 {
-    "positions": [
-        {
-            "name": "AM Rockstar Batcher",
-            "positionFull": false,
-            "requiredSkill": "Cold Fill CSD",
-            "positionEmployee": "null"
-        },
-        {
-            "name": "PM Rockstar Batcher",
-            "positionFull": true,
-            "requiredSkill": "Cold Fill Rockstar",
-            "positionEmployee": "6ff3d38f-6c8b-48ac-b6e0-9e8302b5f0d7"
-        },
-        {
-            "name": "GY Rockstar Batcher",
-            "positionFull": false,
-            "requiredSkill": "Cold Fill Rockstar",
-            "positionEmployee": "null"
-        }
-    ],
-    "employees": [
-        {
-            "employeeSkills": [
-                {"skillName": "Cold Fill CSD"},
-                {"skillName": "Cold Fill Rockstar"},
-                {"skillName": "Line 5 Gatorade"}
-            ],
-            "hasPosition": true,
-            "name": "Matt",
-            "employeeID": "6ff3d38f-6c8b-48ac-b6e0-9e8302b5f0d7"
-        },
-        {
-            "employeeSkills": [],
-            "hasPosition": false,
-            "name": "John",
-            "employeeID": "59ff99be-3335-455b-90f8-7b65231e567d"
-        },
-        {
-            "employeeSkills": [{"skillName": "CIP"}],
-            "hasPosition": false,
-            "name": "Pumba",
-            "employeeID": "970f03af-b865-4494-8718-a49708fa608b"
-        },
-        {
-            "employeeSkills": [],
-            "hasPosition": false,
-            "name": "Timon",
-            "employeeID": "b154b33c-9e20-418c-b975-8929c9fb5927"
-        },
-        {
-            "employeeSkills": [],
-            "hasPosition": false,
-            "name": "Patrice",
-            "employeeID": "c5184667-b159-4883-9675-6ac11efaeb2b"
-        }
-    ]
+    "positions": [],
+    "employees": [{
+        "employeeSkills": [{"skillName": "CIP"}],
+        "hasPosition": false,
+        "name": "bob",
+        "employeeID": "2e7fb9af-2f86-41d3-b6aa-20870a7ad8a5"
+    }]
 }
