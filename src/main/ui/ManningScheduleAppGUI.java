@@ -25,6 +25,9 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     private MSJsonWriter msJsonWriter;
     private JButton addEmployee;
     private JButton removeEmployee;
+    private JButton employeeSkills;
+    private JButton saveSchedule;
+    private JButton loadSchedule;
     private JFrame frame;
     private JList eeList;
     private DefaultListModel eeNames;
@@ -38,6 +41,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         //menu();
     }
 
+    // EFFECTS: Creates a frame.
     public void createFrame() {
         frame = new JFrame("frame");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,13 +55,15 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
+    // EFFECTS: Constructs a panel to contain employee functions
     public JPanel employeePanel() {
         JPanel employeePanel = new JPanel();
         employeePanel.setBackground(new Color(223, 239, 239));
         employeePanel.setBounds(0,0,400,700);
-        employeePanel.setLayout(new GridLayout(2,2,10,10));
-        addEmployeeButtons(employeePanel);
-
+        employeePanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        addEmployeeButtons(employeePanel, c);
+        addSaveLoad(employeePanel, c);
 
         eeNames = new DefaultListModel();
 
@@ -67,22 +73,54 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         eeList.setVisibleRowCount(5);
         JScrollPane listScroller = new JScrollPane(eeList);
         listScroller.setPreferredSize(new Dimension(250, 400));
-
-        employeePanel.add(listScroller);
+        c.gridwidth = 2;
+        c.ipady = 40;
+        c.gridx = 0;
+        c.gridy = 3;
+        employeePanel.add(listScroller, c);
 
         return employeePanel;
     }
 
-    private void addEmployeeButtons(JPanel p) {
+    // MODIFIES: this
+    // EFFECTS: Creates a panel with buttons to add/remove employees and add/remove skills to each
+    private void addEmployeeButtons(JPanel p, GridBagConstraints c) {
         addEmployee = new JButton();
         addEmployee.setText("Add Employee");
         addEmployee.addActionListener(this);
-        p.add(addEmployee);
+        c.gridx = 0;
+        c.gridy = 0;
+        p.add(addEmployee, c);
 
         removeEmployee = new JButton();
         removeEmployee.setText("Remove Employee");
         removeEmployee.addActionListener(this);
-        p.add(removeEmployee);
+        c.gridx = 1;
+        c.gridy = 0;
+        p.add(removeEmployee, c);
+
+        employeeSkills = new JButton();
+        employeeSkills.setText("Add/Remove Skills");
+        //c.gridwidth = 2;
+        c.gridx = 0;
+        c.gridy = 1;
+        p.add(employeeSkills, c);
+    }
+
+    private void addSaveLoad(JPanel p, GridBagConstraints c) {
+        saveSchedule = new JButton();
+        saveSchedule.setText("Save");
+        saveSchedule.addActionListener(this);
+        c.gridx = 0;
+        c.gridy = 2;
+        p.add(saveSchedule, c);
+
+        loadSchedule = new JButton();
+        loadSchedule.setText("Load");
+        loadSchedule.addActionListener(this);
+        c.gridx = 1;
+        c.gridy = 2;
+        p.add(loadSchedule, c);
     }
 
     @Override
@@ -94,6 +132,14 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
         if (e.getSource() == removeEmployee) {
             removeEmployee();
+        }
+
+        if (e.getSource() == saveSchedule) {
+            saveSchedule();
+        }
+
+        if (e.getSource() == loadSchedule) {
+            loadSchedule();
         }
     }
 
@@ -168,7 +214,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             roster.addEmployee(employee);
 
             System.out.println("Added " + employeeName + " to Employee Roster");
-            //employeeMenu();
+            removeEmployee.setEnabled(true);
         }
 
         for (Employee e: roster.getRoster()) {
@@ -186,26 +232,28 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         Employee eeToRemove;
 
         int index = eeList.getSelectedIndex();
-        String removeName = eeList.getSelectedValue().toString();
+        if (index != -1) {
+            String removeName = eeList.getSelectedValue().toString();
 
-        for (Employee e: roster.getRoster()) {
-            String name = e.getEmployeeName();
-            if (name.equals(removeName)) {
-                eeToRemove = e;
-                roster.removeEmployee(eeToRemove);
+            for (int i = 0; i < roster.rosterSize(); i++) {
+                Employee employee = roster.getEmployee(i);
+                String name = employee.getEmployeeName();
+                if (name.equals(removeName)) {
+                    eeToRemove = employee;
+                    roster.removeEmployee(eeToRemove);
+                }
             }
-        }
 
-        eeNames.remove(index);
+            eeNames.remove(index);
 
-        // templated from ListDemo on Oracle Java Swing Tutorials
-        int size = eeNames.getSize();
-        if (size == 0) {
-            removeEmployee.setEnabled(false);
-        } else {
-            if (index == eeNames.getSize()) {
+            // templated from ListDemo on Oracle Java Swing Tutorials
+            int size = eeNames.getSize();
+            if (size == 0) {
+                removeEmployee.setEnabled(false);
+            } else if (index == eeNames.getSize()) {
                 index--;
             }
+
             eeList.setSelectedIndex(index);
             eeList.ensureIndexIsVisible(index);
         }
@@ -552,7 +600,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_WRITE_STORE);
         }
-        //menu();
     }
 
     // templated from JsonSerializationDemo
@@ -568,7 +615,11 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-        menu();
+        // generates the data in the JList to be displayed in the scroll pane
+        addEmployee(null);
+        while (true) {
+            JOptionPane.showMessageDialog(null, "HAHA", "Haaa", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
 }
