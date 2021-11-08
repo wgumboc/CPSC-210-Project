@@ -1,9 +1,17 @@
 {
     "positions": [],
-    "employees": [{
-        "employeeSkills": [{"skillName": "CIP"}],
-        "hasPosition": false,
-        "name": "bob",
-        "employeeID": "2e7fb9af-2f86-41d3-b6aa-20870a7ad8a5"
-    }]
+    "employees": [
+        {
+            "employeeSkills": [],
+            "hasPosition": false,
+            "name": "Jane Doe",
+            "employeeID": "0be676a2-fccc-4d1f-bb87-982cfe65d681"
+        },
+        {
+            "employeeSkills": [],
+            "hasPosition": false,
+            "name": "Kayla",
+            "employeeID": "0c4ca2d5-2661-499a-9103-067d71bac49d"
+        }
+    ]
 }
