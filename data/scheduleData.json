@@ -14,16 +14,16 @@
             "employeeID": "06ab4762-bc1c-44c8-84e2-a76e6da599dc"
         },
         {
-            "employeeSkills": [],
+            "employeeSkills": [
+                {"skillName": "Line 5 Sobe"},
+                {"skillName": "Line 5 Gatorade"},
+                {"skillName": "Lead Hand"},
+                {"skillName": "Microbiology Tech"},
+                {"skillName": "Sanitation - Externals"}
+            ],
             "hasPosition": false,
             "name": "Ironman",
             "employeeID": "db83a415-1db0-4da1-9826-25a1cb032c3d"
-        },
-        {
-            "employeeSkills": [],
-            "hasPosition": false,
-            "name": "Cubey",
-            "employeeID": "5594001d-da22-48b8-a208-98654ce15119"
         }
     ]
 }

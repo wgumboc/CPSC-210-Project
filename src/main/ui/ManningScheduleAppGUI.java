@@ -26,11 +26,15 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     private JButton addEmployee;
     private JButton removeEmployee;
     private JButton employeeSkills;
+    private JButton addPosition;
+    private JButton removePosition;
     private JButton saveSchedule;
     private JButton loadSchedule;
     private JFrame frame;
     private JList eeList;
+    private JList posList;
     private DefaultListModel eeNames;
+    private DefaultListModel posNames;
 
     // EFFECTS: initializes lists and brings up main menu
     public ManningScheduleAppGUI() {
@@ -52,6 +56,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         frame.getContentPane().setBackground(new Color(171, 219, 227));
 
         frame.add(employeePanel());
+        frame.add(positionPanel());
         frame.setVisible(true);
     }
 
@@ -82,12 +87,40 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         return employeePanel;
     }
 
+    // EFFECTS: Constructs a panel to contain employee functions
+    public JPanel positionPanel() {
+        JPanel positionPanel = new JPanel();
+        positionPanel.setBackground(new Color(209, 207, 226));
+        positionPanel.setBounds(400,0,800,700);
+        positionPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        addPositionButtons(positionPanel, c);
+
+        posNames = new DefaultListModel();
+
+        posList = new JList(posNames);
+        posList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        posList.setSelectedIndex(0);
+        posList.setVisibleRowCount(5);
+        JScrollPane listScroller = new JScrollPane(posList);
+
+        listScroller.setPreferredSize(new Dimension(450, 400));
+        c.gridwidth = 2;
+        c.ipady = 40;
+        c.gridx = 0;
+        c.gridy = 3;
+        positionPanel.add(listScroller, c);
+
+        return positionPanel;
+    }
+
     // MODIFIES: this
     // EFFECTS: Creates a panel with buttons to add/remove employees and add/remove skills to each
     private void addEmployeeButtons(JPanel p, GridBagConstraints c) {
         addEmployee = new JButton();
         addEmployee.setText("Add Employee");
         addEmployee.addActionListener(this);
+        addEmployee.setPreferredSize(new Dimension(140, 30));
         c.gridx = 0;
         c.gridy = 0;
         p.add(addEmployee, c);
@@ -95,22 +128,47 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         removeEmployee = new JButton();
         removeEmployee.setText("Remove Employee");
         removeEmployee.addActionListener(this);
+        removeEmployee.setPreferredSize(new Dimension(140, 30));
         c.gridx = 1;
         c.gridy = 0;
         p.add(removeEmployee, c);
 
         employeeSkills = new JButton();
         employeeSkills.setText("Add/Remove Skills");
-        //c.gridwidth = 2;
+        employeeSkills.addActionListener(this);
+        employeeSkills.setPreferredSize(new Dimension(280, 30));
+        c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 1;
         p.add(employeeSkills, c);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Creates a panel with buttons to add/remove employees and add/remove skills to each
+    private void addPositionButtons(JPanel p, GridBagConstraints c) {
+        addPosition = new JButton();
+        addPosition.setText("Add Position");
+        addPosition.addActionListener(this);
+        addPosition.setPreferredSize(new Dimension(225, 30));
+        c.gridx = 0;
+        c.gridy = 0;
+        p.add(addPosition, c);
+
+        removePosition = new JButton();
+        removePosition.setText("Remove Position");
+        removePosition.addActionListener(this);
+        removePosition.setPreferredSize(new Dimension(225, 30));
+        c.gridx = 1;
+        c.gridy = 0;
+        p.add(removePosition, c);
     }
 
     private void addSaveLoad(JPanel p, GridBagConstraints c) {
         saveSchedule = new JButton();
         saveSchedule.setText("Save");
         saveSchedule.addActionListener(this);
+        saveSchedule.setPreferredSize(new Dimension(140, 30));
+        c.gridwidth = 1;
         c.gridx = 0;
         c.gridy = 2;
         p.add(saveSchedule, c);
@@ -118,6 +176,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         loadSchedule = new JButton();
         loadSchedule.setText("Load");
         loadSchedule.addActionListener(this);
+        loadSchedule.setPreferredSize(new Dimension(140, 30));
         c.gridx = 1;
         c.gridy = 2;
         p.add(loadSchedule, c);
@@ -134,6 +193,14 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             removeEmployee();
         }
 
+        if (e.getSource() == employeeSkills) {
+            int index = eeList.getSelectedIndex();
+            if (index != -1) {
+                Employee selectedEmployee = getSelectedEmployee();
+                SkillsWindow window = new SkillsWindow(selectedEmployee);
+            }
+        }
+
         if (e.getSource() == saveSchedule) {
             saveSchedule();
         }
@@ -141,6 +208,22 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         if (e.getSource() == loadSchedule) {
             loadSchedule();
         }
+    }
+
+    private Employee getSelectedEmployee() {
+        Employee selected = null;
+
+        String eeName = eeList.getSelectedValue().toString();
+
+        for (int i = 0; i < roster.rosterSize(); i++) {
+            Employee employee = roster.getEmployee(i);
+            String name = employee.getEmployeeName();
+            if (name.equals(eeName)) {
+                selected = employee;
+            }
+        }
+
+        return selected;
     }
 
     // MODIFIES: this
@@ -164,28 +247,9 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         System.out.println("\t Press 4 to save schedule to file.");
         System.out.println("\t Press 5 to exit.");
 
-        inputNum = selectionScanning(userSelection);
-
         menuSelection(inputNum);
     }
 
-    // templated from https://stackoverflow.com/questions/3059333/validating-input-using-java-util-scanner
-    // MODIFIES: this
-    // EFFECTS: scans for user input and rejects non-integers
-    private int selectionScanning(Scanner scanner) {
-        int num;
-        do {
-            while (!scanner.hasNextInt()) {
-                System.out.println("Please enter an integer.");
-                scanner.next();
-            }
-            num = scanner.nextInt();
-            if (num < 0) {
-                System.out.println("Please enter a non-negative integer.");
-            }
-        } while (num < 0);
-        return num;
-    }
 
     // MODIFIES: this
     // EFFECTS: directs user to correct menu depending on user input
@@ -193,7 +257,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         if (selection == 1) {
             //stub
         } else if (selection == 2) {
-            positionMenu();
+            //positionMenu();
         } else if (selection == 3) {
             loadSchedule();
         } else if (selection == 4) {
@@ -213,10 +277,16 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             Employee employee = new Employee(employeeName);
             roster.addEmployee(employee);
 
-            System.out.println("Added " + employeeName + " to Employee Roster");
+            addToJListData();
+
+            JOptionPane.showMessageDialog(null, "Added " + employeeName + " to roster.", "",
+                    JOptionPane.INFORMATION_MESSAGE);
+
             removeEmployee.setEnabled(true);
         }
+    }
 
+    private void addToJListData() {
         for (Employee e: roster.getRoster()) {
             String name = e.getEmployeeName();
             if (!eeNames.contains(name)) {
@@ -246,18 +316,26 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
             eeNames.remove(index);
 
-            // templated from ListDemo on Oracle Java Swing Tutorials
-            int size = eeNames.getSize();
-            if (size == 0) {
-                removeEmployee.setEnabled(false);
-            } else if (index == eeNames.getSize()) {
-                index--;
-            }
+            JOptionPane.showMessageDialog(null, "Removed " + removeName + " from roster.",
+                    "", JOptionPane.INFORMATION_MESSAGE);
 
-            eeList.setSelectedIndex(index);
-            eeList.ensureIndexIsVisible(index);
+            //correctIndex(index);
         }
     }
+
+//    // templated from ListDemo on Oracle Java Swing Tutorials
+//    // EFFECTS: Corrects the index of the JList.
+//    private void correctIndex(int index) {
+//        int size = eeNames.getSize();
+//        if (size == 0) {
+//            removeEmployee.setEnabled(false);
+//        } else if (index == eeNames.getSize()) {
+//            index--;
+//        }
+//
+//        eeList.setSelectedIndex(index);
+//        eeList.ensureIndexIsVisible(index);
+//    }
 
     // REQUIRES: roster is not empty
     // EFFECTS: Displays all employees in the roster.
@@ -268,96 +346,60 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         }
     }
 
-    // REQUIRES: roster is not empty
-    // MODIFIES: this
-    // EFFECTS: Displays a menu with actions to act on an employee, and prompts user for input.
-    private void selectEmployee() {
-        Scanner userSelection = new Scanner(System.in);
-        Employee employee;
-
-        System.out.println("Please select an employee.");
-
-        for (int i = 0; i < roster.rosterSize(); i++) {
-            employee = roster.getEmployee(i);
-            System.out.println(i + " - " + employee.getEmployeeName());
-        }
-
-        inputNum = selectionScanning(userSelection);
-
-        employee = roster.getEmployee(inputNum);
-        System.out.println("You have selected " + employee.getEmployeeName());
-
-        System.out.println("\n What would you like to do?");
-        System.out.println("\t Press 1 to add a skill.");
-        System.out.println("\t Press 2 to remove a skill.");
-        System.out.println("\t Press 3 to display all skills.");
-        System.out.println("\t Press 4 to return to employee menu.");
-
-        inputNum = selectionScanning(userSelection);
-
-        employeeSelection(inputNum, employee);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: Directs the user to the appropriate action for the employee depending on user input.
-    private void employeeSelection(int selection, Employee employee) {
-
-    }
-
-    // MODIFIES: this
-    // EFFECTS: Adds a skill to an employee based on set skills.
-    private void addSkill(Employee employee) {
-        SkillsList employeeSkills;
-        Skill skill;
-        Scanner userSelection = new Scanner(System.in);
-
-        System.out.println("Please select a skill to add to an employee");
-        skillsListDisplay(qcDepSkills);
-
-        inputNum = selectionScanning(userSelection);
-
-        skill = qcDepSkills.getSkill(inputNum);
-        employeeSkills = employee.getSkills();
-
-        if (employeeSkills.hasSkill(skill)) {
-            System.out.println("Employee already has selected skill.");
-        } else {
-            employeeSkills.addSkill(skill);
-
-            System.out.println(skill.getSkillName() + " attributed to " + employee.getEmployeeName());
-            displaySkills(employee);
-        }
-    }
-
-    // REQUIRES: SkillList is not empty
-    // MODIFIES: this
-    // EFFECTS: Removes a specific skill of the employee
-    private void removeSkill(Employee employee) {
-        Scanner skillNum = new Scanner(System.in);
-        Skill skillToRemove;
-        SkillsList employeeSkills;
-        employeeSkills = employee.getSkills();
-
-        System.out.println("Here are all the skills of " + employee.getEmployeeName());
-
-        for (int i = 0; i < employeeSkills.skillsListSize(); i++) {
-            Skill getSkill = employeeSkills.getSkill(i);
-            System.out.println(i + " - " + getSkill.getSkillName());
-        }
-
-        System.out.println("Enter the number of the skill you would like to remove.");
-
-        inputNum = selectionScanning(skillNum);
-
-        if (inputNum < employeeSkills.skillsListSize()) {
-            skillToRemove = employeeSkills.getSkill(inputNum);
-            employeeSkills.removeSkill(skillToRemove);
-            System.out.println("Removed " + skillToRemove.getSkillName() + " from " + employee.getEmployeeName());
-        } else {
-            System.out.println("Not a valid selection");
-        }
-
-    }
+//    // MODIFIES: this
+//    // EFFECTS: Adds a skill to an employee based on set skills.
+//    private void addSkill(Employee employee) {
+//        SkillsList employeeSkills;
+//        Skill skill;
+//        Scanner userSelection = new Scanner(System.in);
+//
+//        System.out.println("Please select a skill to add to an employee");
+//        skillsListDisplay(qcDepSkills);
+//
+//        inputNum = selectionScanning(userSelection);
+//
+//        skill = qcDepSkills.getSkill(inputNum);
+//        employeeSkills = employee.getSkills();
+//
+//        if (employeeSkills.hasSkill(skill)) {
+//            System.out.println("Employee already has selected skill.");
+//        } else {
+//            employeeSkills.addSkill(skill);
+//
+//            System.out.println(skill.getSkillName() + " attributed to " + employee.getEmployeeName());
+//            displaySkills(employee);
+//        }
+//    }
+//
+//    // REQUIRES: SkillList is not empty
+//    // MODIFIES: this
+//    // EFFECTS: Removes a specific skill of the employee
+//    private void removeSkill(Employee employee) {
+//        Scanner skillNum = new Scanner(System.in);
+//        Skill skillToRemove;
+//        SkillsList employeeSkills;
+//        employeeSkills = employee.getSkills();
+//
+//        System.out.println("Here are all the skills of " + employee.getEmployeeName());
+//
+//        for (int i = 0; i < employeeSkills.skillsListSize(); i++) {
+//            Skill getSkill = employeeSkills.getSkill(i);
+//            System.out.println(i + " - " + getSkill.getSkillName());
+//        }
+//
+//        System.out.println("Enter the number of the skill you would like to remove.");
+//
+//        inputNum = selectionScanning(skillNum);
+//
+//        if (inputNum < employeeSkills.skillsListSize()) {
+//            skillToRemove = employeeSkills.getSkill(inputNum);
+//            employeeSkills.removeSkill(skillToRemove);
+//            System.out.println("Removed " + skillToRemove.getSkillName() + " from " + employee.getEmployeeName());
+//        } else {
+//            System.out.println("Not a valid selection");
+//        }
+//
+//    }
 
     // REQUIRES: SkillList is not empty
     // EFFECTS: Displays all the employee's skills
@@ -372,53 +414,8 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             skill = skillsList.getSkill(i);
             System.out.println(skill.getSkillName());
         }
-
     }
 
-    // REQUIRES: SkillList is not empty
-    // EFFECTS: displays all skills in the skillsList
-    private void skillsListDisplay(SkillsList skillsList) {
-        for (int i = 0; i < skillsList.skillsListSize(); i++) {
-            Skill getSkill = skillsList.getSkill(i);
-            System.out.println(i + " - " + getSkill.getSkillName());
-        }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: gives user options to add/remove/show all/ or select positions and prompts user for input
-    private void positionMenu() {
-        Scanner userSelection = new Scanner(System.in);
-
-        System.out.println("\n What would you like to do?");
-        System.out.println("\t Press 1 to add a position.");
-        System.out.println("\t Press 2 to remove a position.");
-        System.out.println("\t Press 3 to show all positions.");
-        System.out.println("\t Press 4 to select a position.");
-        System.out.println("\t Press 5 to return to main menu.");
-
-        inputNum = selectionScanning(userSelection);
-
-        positionMenuSelection(inputNum);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: directs user to correct position operation depending on user input
-    private void positionMenuSelection(int selection) {
-        if (selection == 1) {
-            addPosition();
-        } else if (selection == 2) {
-            removePosition();
-        } else if (selection == 3) {
-            showAllPositions();
-        } else if (selection == 4) {
-            selectPosition();
-        } else if (selection == 5) {
-            menu();
-        } else {
-            System.out.println("Not a valid selection.");
-            menu();
-        }
-    }
 
     // MODIFIES: this
     // EFFECTS: Asks user to enter a position name and creates Position and puts into list of positions
@@ -431,9 +428,9 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
         System.out.println("Please select the skill that you would like this position to require.");
         
-        skillsListDisplay(qcDepSkills);
+//        skillsListDisplay(qcDepSkills);
 
-        inputNum = selectionScanning(input);
+
         skill = qcDepSkills.getSkill(inputNum);
 
         Position position = new Position(positionName, skill);
@@ -441,7 +438,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
         System.out.println("Added " + positionName + " to list of positions.");
 
-        positionMenu();
     }
 
     // REQUIRES: positionList is not empty
@@ -460,7 +456,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
         System.out.println("Enter the number of the position you would like to remove.");
 
-        inputNum = selectionScanning(positionNum);
 
         if (inputNum < positionList.positionListSize()) {
             posToRemove = positionList.getPosition(inputNum);
@@ -470,7 +465,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             System.out.println("Not a valid selection");
         }
 
-        positionMenu();
     }
 
     // REQUIRES: positionList is not empty
@@ -488,7 +482,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
                 System.out.println(position.getPositionName() + " filled by " + positionEmployee.getEmployeeName());
             }
         }
-        positionMenu();
     }
 
     // REQUIRES: positionList not empty
@@ -505,7 +498,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             System.out.println(i + " - " + position.getPositionName());
         }
 
-        inputNum = selectionScanning(userSelection);
         position = positionList.getPosition(inputNum);
         System.out.println("You have selected " + position.getPositionName());
 
@@ -514,7 +506,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         System.out.println("\t Press 2 to remove an assigned employee.");
         System.out.println("\t Press 3 to return to position menu.");
 
-        inputNum = selectionScanning(userSelection);
 
         positionSelection(inputNum, position);
     }
@@ -527,7 +518,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         } else if (selection == 2) {
             removeAssignment(position);
         } else if (selection == 3) {
-            positionMenu();
+            //
         } else {
             System.out.println("Not a valid selection.");
             selectPosition();
@@ -547,7 +538,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             System.out.println(i + " - " + employee.getEmployeeName());
         }
 
-        inputNum = selectionScanning(userSelection);
         employee = roster.getEmployee(inputNum);
 
         assignPosition(position, employee);
@@ -571,7 +561,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             System.out.println(employee.getEmployeeName() + " has been assigned to " + position.getPositionName());
         }
 
-        positionMenu();
     }
 
     // MODIFIES: this
@@ -585,7 +574,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             System.out.println(posEmployee.getEmployeeName() + " has been removed from " + position.getPositionName());
         }
 
-        positionMenu();
     }
 
     // templated from JsonSerializationDemo
@@ -597,6 +585,8 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             msJsonWriter.write(schedule);
             msJsonWriter.close();
             System.out.println("Saved to " + JSON_WRITE_STORE);
+            JOptionPane.showMessageDialog(null, "Schedule Saved Successfully", "",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_WRITE_STORE);
         }
@@ -612,13 +602,11 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             roster = schedule.getRoster();
             positionList = schedule.getPositionList();
             System.out.println("Loaded schedule from " + JSON_STORE);
+            addToJListData();
+            JOptionPane.showMessageDialog(null, "Schedule Loaded Successfully", "",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
-        }
-        // generates the data in the JList to be displayed in the scroll pane
-        addEmployee(null);
-        while (true) {
-            JOptionPane.showMessageDialog(null, "HAHA", "Haaa", JOptionPane.WARNING_MESSAGE);
         }
     }
 
