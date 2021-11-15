@@ -89,6 +89,12 @@ public class Position {
         return requiredSkill;
     }
 
+    //MODIFIES: this
+    //EFFECTS: assigns a skill to the position
+    public void assignSkill(Skill skill) {
+        requiredSkill = skill;
+    }
+
     //EFFECTS: returns true if position is filled already, false otherwise
     public Boolean isFull() {
         return positionFull;

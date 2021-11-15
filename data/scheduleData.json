@@ -1,29 +1,53 @@
 {
-    "positions": [],
+    "positions": [
+        {
+            "name": "Position3",
+            "positionFull": false,
+            "requiredSkill": "Cold Fill CSD",
+            "positionEmployee": "null"
+        },
+        {
+            "name": "Position5",
+            "positionFull": false,
+            "requiredSkill": "Microbiology Tech",
+            "positionEmployee": "null"
+        },
+        {
+            "name": "Position7",
+            "positionFull": false,
+            "requiredSkill": "Cold Fill Rockstar",
+            "positionEmployee": "null"
+        }
+    ],
     "employees": [
         {
             "employeeSkills": [],
             "hasPosition": false,
-            "name": "Timon",
-            "employeeID": "3207770b-a9a6-4e49-9c17-9e4f06674305"
+            "name": "Timon Pumba",
+            "employeeID": "7c543c1e-b3e4-44ea-aa61-7eb0da5f0055"
         },
         {
             "employeeSkills": [],
             "hasPosition": false,
-            "name": "Ariel",
-            "employeeID": "06ab4762-bc1c-44c8-84e2-a76e6da599dc"
+            "name": "Giant Panda",
+            "employeeID": "30ee1071-4e15-4a1d-b530-5645ee0067bd"
+        },
+        {
+            "employeeSkills": [],
+            "hasPosition": false,
+            "name": "Hermi One",
+            "employeeID": "38547730-1e4e-4b1a-96d0-86be529aafe2"
         },
         {
             "employeeSkills": [
+                {"skillName": "Sanitation - General"},
+                {"skillName": "Line 5 Dole"},
                 {"skillName": "Line 5 Sobe"},
-                {"skillName": "Line 5 Gatorade"},
-                {"skillName": "Lead Hand"},
-                {"skillName": "Microbiology Tech"},
                 {"skillName": "Sanitation - Externals"}
             ],
             "hasPosition": false,
-            "name": "Ironman",
-            "employeeID": "db83a415-1db0-4da1-9826-25a1cb032c3d"
+            "name": "Lightning McQueen",
+            "employeeID": "7393acb1-a2c2-48ec-9fe8-f04614443b6b"
         }
     ]
 }

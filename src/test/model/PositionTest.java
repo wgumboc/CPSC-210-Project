@@ -60,4 +60,10 @@ class PositionTest {
         assertTrue(position1.isFull());
     }
 
+    @Test
+    public void testAssignSkill() {
+        position1.assignSkill(skill1);
+        assertEquals(skill1, position1.getPositionSkill());
+    }
+
 }
