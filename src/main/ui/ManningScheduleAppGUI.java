@@ -28,6 +28,8 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     private JButton employeeSkills;
     private JButton addPosition;
     private JButton removePosition;
+    private JButton assignEmployee;
+    private JButton removeAssignedEE;
     private JButton saveSchedule;
     private JButton loadSchedule;
     private JFrame frame;
@@ -97,6 +99,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         positionPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         addPositionButtons(positionPanel, c);
+        addEEAssignmentButtons(positionPanel, c);
         addTable(positionPanel, c);
 
         return positionPanel;
@@ -157,6 +160,24 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         p.add(removePosition, c);
     }
 
+    private void addEEAssignmentButtons(JPanel p, GridBagConstraints c) {
+        assignEmployee = new JButton();
+        assignEmployee.setText("Assign Employee");
+        assignEmployee.addActionListener(this);
+        assignEmployee.setPreferredSize(new Dimension(200, 30));
+        c.gridx = 0;
+        c.gridy = 1;
+        p.add(assignEmployee, c);
+
+        removeAssignedEE = new JButton();
+        removeAssignedEE.setText("Remove Assignment");
+        removeAssignedEE.addActionListener(this);
+        removeAssignedEE.setPreferredSize(new Dimension(200, 30));
+        c.gridx = 1;
+        c.gridy = 1;
+        p.add(removeAssignedEE, c);
+    }
+
     // templated from TableSelectionDemo from oracle
     // MODIFIES: this
     // EFFECTS: Creates a table to display position properties.
@@ -175,7 +196,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         jsp.setPreferredSize(new Dimension(400, 400));
         c.gridwidth = 2;
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         p.add(jsp, c);
     }
 
@@ -204,34 +225,26 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         if (e.getSource() == addEmployee) {
             String employeeName = JOptionPane.showInputDialog("Enter the full name of the employee you wish to add:");
             addEmployee(employeeName);
-        }
-
-        if (e.getSource() == removeEmployee) {
+        } else if (e.getSource() == removeEmployee) {
             removeEmployee();
-        }
-
-        if (e.getSource() == employeeSkills) {
+        } else if (e.getSource() == employeeSkills) {
             int index = eeList.getSelectedIndex();
             if (index != -1) {
                 Employee selectedEmployee = getSelectedEmployee();
                 SkillsWindow window = new SkillsWindow(selectedEmployee);
             }
-        }
-
-        if (e.getSource() == addPosition) {
+        } else if (e.getSource() == addPosition) {
             addPosition();
-        }
-
-        if (e.getSource() == removePosition) {
+        } else if (e.getSource() == removePosition) {
             removePosition();
-        }
-
-        if (e.getSource() == saveSchedule) {
+        } else if (e.getSource() == saveSchedule) {
             saveSchedule();
-        }
-
-        if (e.getSource() == loadSchedule) {
+        } else if (e.getSource() == loadSchedule) {
             loadSchedule();
+        } else if (e.getSource() == assignEmployee) {
+            fillPosition();
+        } else if (e.getSource() == removeAssignedEE) {
+            //removeAssignment();
         }
     }
 
@@ -364,19 +377,28 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: Gets the employee who the user wants to fill the position.
-    private void fillPosition(Position position) {
-        Employee employee;
+    private void fillPosition() {
+        Position posToFill = null;
+        Employee employeeToFill;
 
-        System.out.println("Which employee would you like to assign to this position?");
+        int selectedRow = table.getSelectedRow();
 
-        for (int i = 0; i < roster.rosterSize(); i++) {
-            employee = roster.getEmployee(i);
-            System.out.println(i + " - " + employee.getEmployeeName());
+        if (selectedRow != -1) {
+            String posName = table.getModel().getValueAt(selectedRow, 0).toString();
+
+            for (int i = 0; i < positionList.positionListSize(); i++) {
+                Position position = positionList.getPosition(i);
+                String name = position.getPositionName();
+                if (name.equals(posName)) {
+                    posToFill = position;
+                }
+            }
+            int index = eeList.getSelectedIndex();
+            if (index != -1) {
+                employeeToFill = getSelectedEmployee();
+                assignPosition(posToFill, employeeToFill);
+            }
         }
-
-//        employee = roster.getEmployee(inputNum);
-
-//        assignPosition(position, employee);
     }
 
     // MODIFIES: this
@@ -394,6 +416,8 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             System.out.println(employee.getEmployeeName() + " does not have the right skills to fill this position.");
         } else {
             position.fillPosition(employee);
+            SingleSkillSelection s = new SingleSkillSelection(positionList, table);
+            s.addToPositionData();
             System.out.println(employee.getEmployeeName() + " has been assigned to " + position.getPositionName());
         }
 
@@ -448,54 +472,5 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
-
-//    // MODIFIES: this
-//    // EFFECTS: Adds the data of all positions to the table
-//    private void addToPositionData() {
-//        DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        for (Position p: positionList.getAllPositions()) {
-//            String employeeName;
-//            String positionName = p.getPositionName();
-//            String skillName = p.getPositionSkill().getSkillName();
-//            if (p.getPositionEmployee() != null) {
-//                employeeName = p.getPositionEmployee().getEmployeeName();
-//            } else {
-//                employeeName = "None";
-//            }
-//
-//            if (!existsInTable(table, new String[]{positionName, employeeName, skillName})) {
-//                model.addRow(new String[]{positionName, employeeName, skillName});
-//            }
-//        }
-//    }
-//
-//    // Taken from https://stackoverflow.com/questions/15639611/how-to-check-if-a-value-exists-
-//    //            in-jtable-which-i-am-trying-to-add
-//    // EFFECTS: checks if a value already exists in table
-//    public boolean existsInTable(JTable table, Object[] entry) {
-//
-//        // Get row and column count
-//        int rowCount = table.getRowCount();
-//        int colCount = table.getColumnCount();
-//
-//        // Get Current Table Entry
-//        String curEntry = "";
-//        for (Object o : entry) {
-//            String e = o.toString();
-//            curEntry = curEntry + " " + e;
-//        }
-//
-//        // Check against all entries
-//        for (int i = 0; i < rowCount; i++) {
-//            String rowEntry = "";
-//            for (int j = 0; j < colCount; j++) {
-//                rowEntry = rowEntry + " " + table.getValueAt(i, j).toString();
-//            }
-//            if (rowEntry.equalsIgnoreCase(curEntry)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
 }

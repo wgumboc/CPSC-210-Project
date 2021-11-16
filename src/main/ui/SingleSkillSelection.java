@@ -136,9 +136,15 @@ public class SingleSkillSelection implements ActionListener {
         for (Position p: positionList.getAllPositions()) {
             String positionName = p.getPositionName();
             String skillName = p.getPositionSkill().getSkillName();
+            String employeeName;
+            if (p.getPositionEmployee() != null) {
+                employeeName = p.getPositionEmployee().getEmployeeName();
+            } else {
+                employeeName = "None";
+            }
 
-            if (!existsInTable(table, new String[]{positionName, "employeeName", skillName})) {
-                model.addRow(new String[]{positionName, "employeeName", skillName});
+            if (!existsInTable(table, new String[]{positionName, employeeName, skillName})) {
+                model.addRow(new String[]{positionName, employeeName, skillName});
             }
         }
         if (frame != null) {
