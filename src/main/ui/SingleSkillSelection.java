@@ -25,7 +25,6 @@ public class SingleSkillSelection implements ActionListener {
         this.table = table;
     }
 
-
     public SingleSkillSelection(Position position, PositionList positionList, JTable table) {
         this.position = position;
         this.positionList = positionList;
@@ -57,6 +56,7 @@ public class SingleSkillSelection implements ActionListener {
         return skillsPanel;
     }
 
+    //
     public void addButtons(JPanel p) {
         addSkill = new JButton();
         addSkill.setText("Confirm Skill");
@@ -133,6 +133,7 @@ public class SingleSkillSelection implements ActionListener {
     // EFFECTS: Adds the data of all positions to the table
     public void addToPositionData() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
+
         for (Position p: positionList.getAllPositions()) {
             String positionName = p.getPositionName();
             String skillName = p.getPositionSkill().getSkillName();
@@ -143,7 +144,7 @@ public class SingleSkillSelection implements ActionListener {
                 employeeName = "None";
             }
 
-            if (!existsInTable(table, new String[]{positionName, employeeName, skillName})) {
+            if (!existsInTable(table, positionName)) {
                 model.addRow(new String[]{positionName, employeeName, skillName});
             }
         }
@@ -155,25 +156,20 @@ public class SingleSkillSelection implements ActionListener {
     // Taken from https://stackoverflow.com/questions/15639611/how-to-check-if-a-value-exists-
     //            in-jtable-which-i-am-trying-to-add
     // EFFECTS: checks if a value already exists in table
-    public boolean existsInTable(JTable table, Object[] entry) {
+    public boolean existsInTable(JTable table, String entry) {
 
         // Get row and column count
         int rowCount = table.getRowCount();
-        int colCount = table.getColumnCount();
 
         // Get Current Table Entry
-        String curEntry = "";
-        for (Object o : entry) {
-            String e = o.toString();
-            curEntry = curEntry + " " + e;
-        }
+        String curEntry = entry;
 
         // Check against all entries
         for (int i = 0; i < rowCount; i++) {
             String rowEntry = "";
-            for (int j = 0; j < colCount; j++) {
-                rowEntry = rowEntry + " " + table.getValueAt(i, j).toString();
-            }
+
+            rowEntry = table.getValueAt(i, 0).toString();
+
             if (rowEntry.equalsIgnoreCase(curEntry)) {
                 return true;
             }

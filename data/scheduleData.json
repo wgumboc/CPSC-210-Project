@@ -2,14 +2,26 @@
     "positions": [
         {
             "name": "Position3",
-            "positionFull": true,
+            "positionFull": false,
             "requiredSkill": "Cold Fill CSD",
-            "positionEmployee": "7393acb1-a2c2-48ec-9fe8-f04614443b6b"
+            "positionEmployee": "null"
         },
         {
             "name": "Position5",
-            "positionFull": false,
+            "positionFull": true,
             "requiredSkill": "Microbiology Tech",
+            "positionEmployee": "38547730-1e4e-4b1a-96d0-86be529aafe2"
+        },
+        {
+            "name": "Position6",
+            "positionFull": false,
+            "requiredSkill": "Line 5 Sobe",
+            "positionEmployee": "null"
+        },
+        {
+            "name": "Position7",
+            "positionFull": false,
+            "requiredSkill": "Lead Hand",
             "positionEmployee": "null"
         }
     ],
@@ -21,13 +33,19 @@
             "employeeID": "7c543c1e-b3e4-44ea-aa61-7eb0da5f0055"
         },
         {
-            "employeeSkills": [],
+            "employeeSkills": [
+                {"skillName": "Line 5 Dole"},
+                {"skillName": "Line 5 Sobe"}
+            ],
             "hasPosition": false,
             "name": "Giant Panda",
             "employeeID": "30ee1071-4e15-4a1d-b530-5645ee0067bd"
         },
         {
-            "employeeSkills": [{"skillName": "Cold Fill Rockstar"}],
+            "employeeSkills": [
+                {"skillName": "Cold Fill Rockstar"},
+                {"skillName": "Microbiology Tech"}
+            ],
             "hasPosition": true,
             "name": "Hermi One",
             "employeeID": "38547730-1e4e-4b1a-96d0-86be529aafe2"
@@ -40,9 +58,15 @@
                 {"skillName": "Sanitation - Externals"},
                 {"skillName": "Cold Fill CSD"}
             ],
-            "hasPosition": true,
+            "hasPosition": false,
             "name": "Lightning McQueen",
             "employeeID": "7393acb1-a2c2-48ec-9fe8-f04614443b6b"
+        },
+        {
+            "employeeSkills": [{"skillName": "Lead Hand"}],
+            "hasPosition": false,
+            "name": "Moana",
+            "employeeID": "1875ca26-b050-48a9-8357-6811191c756e"
         }
     ]
 }

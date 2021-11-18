@@ -160,6 +160,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         p.add(removePosition, c);
     }
 
+    // EFFECTS: Adds buttons for assigning employees to the positions panel
     private void addEEAssignmentButtons(JPanel p, GridBagConstraints c) {
         assignEmployee = new JButton();
         assignEmployee.setText("Assign Employee");
@@ -200,6 +201,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         p.add(jsp, c);
     }
 
+    // EFFECTS: Adds save and load buttons to the employee panel
     private void addSaveLoad(JPanel p, GridBagConstraints c) {
         saveSchedule = new JButton();
         saveSchedule.setText("Save");
@@ -219,6 +221,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         p.add(loadSchedule, c);
     }
 
+    // EFFECTS: Listens for button press and executes the corresponding method
     @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -244,10 +247,11 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == assignEmployee) {
             fillPosition();
         } else if (e.getSource() == removeAssignedEE) {
-            //removeAssignment();
+            removeAssignment();
         }
     }
 
+    // EFFECTS: Gets the selected employee from the interactive list
     private Employee getSelectedEmployee() {
         Employee selected = null;
 
@@ -290,6 +294,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         }
     }
 
+    // Adds the employee to the JList to be displayed
     private void addToJListData() {
         for (Employee e: roster.getRoster()) {
             String name = e.getEmployeeName();
@@ -346,7 +351,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     private void removePosition() {
         Position posToRemove;
 
-
         int selectedRow = table.getSelectedRow();
 
         if (selectedRow != -1) {
@@ -357,13 +361,15 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
                 String name = position.getPositionName();
                 if (name.equals(removeName)) {
                     posToRemove = position;
+                    if (posToRemove.getPositionEmployee() != null) {
+                        posToRemove.getPositionEmployee().removeAssignment();
+                    }
                     positionList.removePosition(posToRemove);
                 }
             }
         }
 
         removeSelectedRows(table);
-
     }
 
     // Taken from https://stackoverflow.com/questions/655325/how-do-you-remove-selected-rows-from-a-jtable
@@ -405,17 +411,15 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     // EFFECTS: Fills the position with the employee if the position is open, the employee does not have a
     //          current position, and the employee possess the correct skill.
     private void assignPosition(Position position, Employee employee) {
-        SkillsList employeeSkills = employee.getSkills();
-        Skill positionSkill = position.getPositionSkill();
-
         if (employee.hasPosition()) {
             System.out.println(employee.getEmployeeName() + " already has a position.");
         } else if (position.isFull()) {
             System.out.println(position.getPositionName() + " is already filled.");
-        } else if (!(employeeSkills.hasSkill(positionSkill))) {
+        } else if (!hasRightSkill(position, employee)) {
             System.out.println(employee.getEmployeeName() + " does not have the right skills to fill this position.");
         } else {
             position.fillPosition(employee);
+            removeSelectedRows(table);
             SingleSkillSelection s = new SingleSkillSelection(positionList, table);
             s.addToPositionData();
             System.out.println(employee.getEmployeeName() + " has been assigned to " + position.getPositionName());
@@ -423,17 +427,44 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
     }
 
+    // EFFECTS: Checks to see if the employee's list of skills contains the correct skill for the position
+    private boolean hasRightSkill(Position position, Employee employee) {
+        SkillsList employeeSkills = employee.getSkills();
+        Skill positionSkill = position.getPositionSkill();
+
+        for (Skill s: employeeSkills.getList()) {
+            if (s.getSkillName().equals(positionSkill.getSkillName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // MODIFIES: this
     // EFFECTS: Removes the assigned employee from the position if the position is not empty.
-    private void removeAssignment(Position position) {
-        Employee posEmployee = position.getPositionEmployee();
-        if (!position.removeEmployee()) {
-            System.out.println("No employee in position.");
-        } else {
-            position.removeEmployee();
-            System.out.println(posEmployee.getEmployeeName() + " has been removed from " + position.getPositionName());
-        }
+    private void removeAssignment() {
+        Position selectedPos = null;
+        Employee employeeToRemove;
 
+        int selectedRow = table.getSelectedRow();
+
+        if (selectedRow != -1) {
+            String posName = table.getModel().getValueAt(selectedRow, 0).toString();
+
+            for (int i = 0; i < positionList.positionListSize(); i++) {
+                Position position = positionList.getPosition(i);
+                String name = position.getPositionName();
+                if (name.equals(posName)) {
+                    selectedPos = position;
+                }
+            }
+            employeeToRemove = selectedPos.getPositionEmployee();
+            employeeToRemove.removeAssignment();
+            selectedPos.removeEmployee();
+            removeSelectedRows(table);
+            SingleSkillSelection s = new SingleSkillSelection(positionList, table);
+            s.addToPositionData();
+        }
     }
 
     // templated from JsonSerializationDemo

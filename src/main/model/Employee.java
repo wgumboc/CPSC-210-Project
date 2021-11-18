@@ -56,7 +56,7 @@ public class Employee {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets hasPosition to true if employee's position is removed
+    // EFFECTS: sets hasPosition to false if employee's position is removed
     public void removeAssignment() {
         hasPosition = false;
     }
