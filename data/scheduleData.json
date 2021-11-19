@@ -1,72 +1,217 @@
 {
-    "positions": [
-        {
-            "name": "Position3",
-            "positionFull": false,
-            "requiredSkill": "Cold Fill CSD",
-            "positionEmployee": "null"
-        },
-        {
-            "name": "Position5",
-            "positionFull": true,
-            "requiredSkill": "Microbiology Tech",
-            "positionEmployee": "38547730-1e4e-4b1a-96d0-86be529aafe2"
-        },
-        {
-            "name": "Position6",
-            "positionFull": false,
-            "requiredSkill": "Line 5 Sobe",
-            "positionEmployee": "null"
-        },
-        {
-            "name": "Position7",
-            "positionFull": false,
-            "requiredSkill": "Lead Hand",
-            "positionEmployee": "null"
-        }
-    ],
-    "employees": [
-        {
-            "employeeSkills": [],
-            "hasPosition": false,
-            "name": "Timon Pumba",
-            "employeeID": "7c543c1e-b3e4-44ea-aa61-7eb0da5f0055"
-        },
-        {
-            "employeeSkills": [
-                {"skillName": "Line 5 Dole"},
-                {"skillName": "Line 5 Sobe"}
-            ],
-            "hasPosition": false,
-            "name": "Giant Panda",
-            "employeeID": "30ee1071-4e15-4a1d-b530-5645ee0067bd"
-        },
-        {
-            "employeeSkills": [
-                {"skillName": "Cold Fill Rockstar"},
-                {"skillName": "Microbiology Tech"}
-            ],
-            "hasPosition": true,
-            "name": "Hermi One",
-            "employeeID": "38547730-1e4e-4b1a-96d0-86be529aafe2"
-        },
-        {
-            "employeeSkills": [
-                {"skillName": "Sanitation - General"},
-                {"skillName": "Line 5 Dole"},
-                {"skillName": "Line 5 Sobe"},
-                {"skillName": "Sanitation - Externals"},
-                {"skillName": "Cold Fill CSD"}
-            ],
-            "hasPosition": false,
-            "name": "Lightning McQueen",
-            "employeeID": "7393acb1-a2c2-48ec-9fe8-f04614443b6b"
-        },
-        {
-            "employeeSkills": [{"skillName": "Lead Hand"}],
-            "hasPosition": false,
-            "name": "Moana",
-            "employeeID": "1875ca26-b050-48a9-8357-6811191c756e"
-        }
-    ]
+  "positions": [
+    {
+      "name": "Cold Fill Batching - AM",
+      "positionFull": false,
+      "requiredSkill": "Cold Fill CSD",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "Cold Fill Batching - PM",
+      "positionFull": false,
+      "requiredSkill": "Cold Fill CSD",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "Cold Fill Batching - GY",
+      "positionFull": false,
+      "requiredSkill": "Cold Fill CSD",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "Rockstar Support - AM",
+      "positionFull": false,
+      "requiredSkill": "Cold Fill Rockstar",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "Line 5 Batching Dole - AM ",
+      "positionFull": true,
+      "requiredSkill": "Line 5 Dole",
+      "positionEmployee": "805eb095-6c19-4d22-9861-ab21ea32888c"
+    },
+    {
+      "name": "Line 5 Batching Dole - PM",
+      "positionFull": false,
+      "requiredSkill": "Line 5 Dole",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "Line 5 Batching Gat - GY",
+      "positionFull": false,
+      "requiredSkill": "Line 5 Gatorade",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "Lead Hand AM",
+      "positionFull": false,
+      "requiredSkill": "Lead Hand",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "Lead Hand PM",
+      "positionFull": false,
+      "requiredSkill": "Lead Hand",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "CIP 1 - GY",
+      "positionFull": false,
+      "requiredSkill": "CIP",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "CIP 2 - GY",
+      "positionFull": false,
+      "requiredSkill": "CIP",
+      "positionEmployee": "null"
+    },
+    {
+      "name": "CIP - PM",
+      "positionFull": false,
+      "requiredSkill": "CIP",
+      "positionEmployee": "null"
+    }
+  ],
+  "employees": [
+    {
+      "employeeSkills": [
+        {"skillName": "Line 5 Gatorade"},
+        {"skillName": "Line 5 Dole"},
+        {"skillName": "Line 5 Sobe"}
+      ],
+      "hasPosition": true,
+      "name": "Dixon C",
+      "employeeID": "805eb095-6c19-4d22-9861-ab21ea32888c"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Cold Fill Rockstar"}
+      ],
+      "hasPosition": false,
+      "name": "Brian G",
+      "employeeID": "370172ea-50bf-4ded-962b-6b0f32b08283"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Cold Fill Rockstar"},
+        {"skillName": "Line 5 Gatorade"},
+        {"skillName": "Line 5 Dole"},
+        {"skillName": "Line 5 Sobe"}
+      ],
+      "hasPosition": false,
+      "name": "Bryan T",
+      "employeeID": "413ab96a-a5b8-4ee8-bc04-7ebf3c8a81f7"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Cold Fill Rockstar"},
+        {"skillName": "Line 5 Gatorade"},
+        {"skillName": "Line 5 Dole"},
+        {"skillName": "Line 5 Sobe"},
+        {"skillName": "Lead Hand"}
+      ],
+      "hasPosition": false,
+      "name": "Matt G",
+      "employeeID": "4906a692-44ec-4c72-b6c1-debfaa7cd75a"
+    },
+    {
+      "employeeSkills": [{"skillName": "Microbiology Tech"}],
+      "hasPosition": false,
+      "name": "Jacinta C",
+      "employeeID": "b99ad55d-d8d9-499d-9bc8-febe402632ad"
+    },
+    {
+      "employeeSkills": [{"skillName": "Lead Hand"}],
+      "hasPosition": false,
+      "name": "Diane C",
+      "employeeID": "15b58d5c-3edf-4fd6-a985-43f61f5f54ba"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Cold Fill Rockstar"},
+        {"skillName": "Line 5 Gatorade"},
+        {"skillName": "Line 5 Sobe"},
+        {"skillName": "Line 5 Dole"}
+      ],
+      "hasPosition": false,
+      "name": "Clarke S",
+      "employeeID": "dadeed29-58e8-4d53-8959-cd8d7d2aa1d1"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Cold Fill Rockstar"},
+        {"skillName": "Line 5 Gatorade"},
+        {"skillName": "Line 5 Dole"},
+        {"skillName": "Line 5 Sobe"}
+      ],
+      "hasPosition": false,
+      "name": "Jakob G",
+      "employeeID": "88c2a0d5-dcbd-4b15-83c6-4c60d08ff793"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Cold Fill Rockstar"},
+        {"skillName": "Line 5 Gatorade"},
+        {"skillName": "Line 5 Dole"},
+        {"skillName": "Line 5 Sobe"}
+      ],
+      "hasPosition": false,
+      "name": "Premjit R",
+      "employeeID": "548e5ac5-b714-4e3b-86ac-e62a39954627"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Sanitation - General"},
+        {"skillName": "CIP"},
+        {"skillName": "Sanitation - Externals"},
+        {"skillName": "Lead Hand"}
+      ],
+      "hasPosition": false,
+      "name": "Eric T",
+      "employeeID": "b5c392ac-cc32-4021-8b8c-8d5f98b71cfb"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Cold Fill Rockstar"},
+        {"skillName": "Line 5 Gatorade"},
+        {"skillName": "Line 5 Dole"},
+        {"skillName": "Line 5 Sobe"},
+        {"skillName": "CIP"},
+        {"skillName": "Sanitation - General"},
+        {"skillName": "Sanitation - Externals"}
+      ],
+      "hasPosition": false,
+      "name": "Cesar C",
+      "employeeID": "cc0616e6-7e63-4684-b2ef-5b7c6900e996"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "CIP"},
+        {"skillName": "Sanitation - Externals"},
+        {"skillName": "Cold Fill CSD"},
+        {"skillName": "Sanitation - General"},
+        {"skillName": "Lead Hand"}
+      ],
+      "hasPosition": false,
+      "name": "Edward V",
+      "employeeID": "d8e3b74b-5c4d-47df-b33a-f61b68634c34"
+    },
+    {
+      "employeeSkills": [
+        {"skillName": "Sanitation - General"},
+        {"skillName": "Sanitation - Externals"}
+      ],
+      "hasPosition": false,
+      "name": "Darrell C",
+      "employeeID": "e7c445c4-68ee-4e37-8a68-d480485f7460"
+    }
+  ]
 }

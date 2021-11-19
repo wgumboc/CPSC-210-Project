@@ -39,9 +39,18 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     private DefaultListModel posNames;
     private JTable table;
     private Object[][] positionData;
+    private SplashScreen splashScreen;
 
     // EFFECTS: initializes lists and brings up main menu
     public ManningScheduleAppGUI() {
+        splashScreen = new SplashScreen();
+    }
+
+    public ManningScheduleAppGUI(String s) {
+        //
+    }
+
+    public void startProgram() {
         msJsonReader = new MSJsonReader(JSON_STORE);
         msJsonWriter = new MSJsonWriter(JSON_WRITE_STORE);
         createLists();
@@ -61,6 +70,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
         frame.add(employeePanel());
         frame.add(positionPanel());
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
