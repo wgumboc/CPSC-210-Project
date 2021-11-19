@@ -220,7 +220,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     }
 
     // EFFECTS: Listens for button press and executes the corresponding method
-    @SuppressWarnings({"checkstyle:MethodLength", "checkstyle:SuppressWarnings"})
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addEmployee) {
@@ -229,11 +228,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         } else if (e.getSource() == removeEmployee) {
             removeEmployee();
         } else if (e.getSource() == employeeSkills) {
-            int index = eeList.getSelectedIndex();
-            if (index != -1) {
-                Employee selectedEmployee = getSelectedEmployee();
-                SkillsWindow window = new SkillsWindow(selectedEmployee);
-            }
+            openSkillsWindow();
         } else if (e.getSource() == addPosition) {
             addPosition();
         } else if (e.getSource() == removePosition) {
@@ -246,6 +241,15 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             fillPosition();
         } else if (e.getSource() == removeAssignedEE) {
             removeAssignment();
+        }
+    }
+
+    // EFFECTS: Opens the select skills window if there is a selection
+    private void openSkillsWindow() {
+        int index = eeList.getSelectedIndex();
+        if (index != -1) {
+            Employee selectedEmployee = getSelectedEmployee();
+            SkillsWindow window = new SkillsWindow(selectedEmployee);
         }
     }
 
