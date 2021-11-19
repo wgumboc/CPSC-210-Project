@@ -34,9 +34,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     private JButton loadSchedule;
     private JFrame frame;
     private JList eeList;
-    private JList posList;
     private DefaultListModel eeNames;
-    private DefaultListModel posNames;
     private JTable table;
     private Object[][] positionData;
     private SplashScreen splashScreen;
@@ -46,18 +44,20 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         splashScreen = new SplashScreen();
     }
 
+    // EFFECTS: Acts as a throwaway constructor
     public ManningScheduleAppGUI(String s) {
         //
     }
 
+    // EFFECTS: creates the Json Reader and Writer and initializes lists and frame
     public void startProgram() {
         msJsonReader = new MSJsonReader(JSON_STORE);
         msJsonWriter = new MSJsonWriter(JSON_WRITE_STORE);
         createLists();
         createFrame();
-        //menu();
     }
 
+    // MODIFIES: this
     // EFFECTS: Creates a frame.
     private void createFrame() {
         frame = new JFrame("frame");
@@ -74,6 +74,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         frame.setVisible(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: Constructs a panel to contain employee functions
     private JPanel employeePanel() {
         JPanel employeePanel = new JPanel();
@@ -101,6 +102,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         return employeePanel;
     }
 
+    // MODIFIES: this
     // EFFECTS: Constructs a panel to contain employee functions
     private JPanel positionPanel() {
         JPanel positionPanel = new JPanel();
@@ -113,12 +115,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         addTable(positionPanel, c);
 
         return positionPanel;
-    }
-
-    private Object[][] positionsData() {
-        positionData = new Object[23][3];
-
-        return positionData;
     }
 
     // MODIFIES: this
@@ -383,6 +379,8 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     }
 
     // Taken from https://stackoverflow.com/questions/655325/how-do-you-remove-selected-rows-from-a-jtable
+    // MODIFIES: this
+    // EFFECTS: removes the row that selected by the user
     public void removeSelectedRows(JTable table) {
         DefaultTableModel model = (DefaultTableModel) this.table.getModel();
         int[] rows = table.getSelectedRows();
@@ -422,17 +420,21 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     //          current position, and the employee possess the correct skill.
     private void assignPosition(Position position, Employee employee) {
         if (employee.hasPosition()) {
-            System.out.println(employee.getEmployeeName() + " already has a position.");
+            JOptionPane.showMessageDialog(null, employee.getEmployeeName()
+                    + " already has a position.");
         } else if (position.isFull()) {
-            System.out.println(position.getPositionName() + " is already filled.");
+            JOptionPane.showMessageDialog(null,position.getPositionName()
+                    + " is already filled.");
         } else if (!hasRightSkill(position, employee)) {
-            System.out.println(employee.getEmployeeName() + " does not have the right skills to fill this position.");
+            JOptionPane.showMessageDialog(null,employee.getEmployeeName()
+                    + " does not have the right skills to fill this position.");
         } else {
             position.fillPosition(employee);
             removeSelectedRows(table);
             SingleSkillSelection s = new SingleSkillSelection(positionList, table);
             s.addToPositionData();
-            System.out.println(employee.getEmployeeName() + " has been assigned to " + position.getPositionName());
+            JOptionPane.showMessageDialog(null,employee.getEmployeeName()
+                    + " has been assigned to " + position.getPositionName());
         }
 
     }
@@ -485,11 +487,10 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             msJsonWriter.open();
             msJsonWriter.write(schedule);
             msJsonWriter.close();
-            System.out.println("Saved to " + JSON_WRITE_STORE);
             JOptionPane.showMessageDialog(null, "Schedule Saved Successfully", "",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_WRITE_STORE);
+            JOptionPane.showMessageDialog(null, "Unable to write to file: " + JSON_WRITE_STORE);
         }
     }
 
@@ -502,7 +503,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             schedule = msJsonReader.read();
             roster = schedule.getRoster();
             positionList = schedule.getPositionList();
-            System.out.println("Loaded schedule from " + JSON_STORE);
             addToJListData();
             SingleSkillSelection s = new SingleSkillSelection(positionList, table);
             s.addToPositionData();
@@ -510,7 +510,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Schedule Loaded Successfully", "",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE);
         }
     }
 
