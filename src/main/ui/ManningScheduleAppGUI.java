@@ -64,9 +64,9 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
-        frame.setSize(1200,700);
+        frame.setSize(1000,600);
 
-        frame.getContentPane().setBackground(new Color(171, 219, 227));
+        frame.getContentPane().setBackground(new Color(50, 50, 50));
 
         frame.add(employeePanel());
         frame.add(positionPanel());
@@ -78,12 +78,11 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     // EFFECTS: Constructs a panel to contain employee functions
     private JPanel employeePanel() {
         JPanel employeePanel = new JPanel();
-        employeePanel.setBackground(new Color(223, 239, 239));
-        employeePanel.setBounds(0,0,400,700);
-        employeePanel.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        addEmployeeButtons(employeePanel, c);
-        addSaveLoad(employeePanel, c);
+        employeePanel.setBackground(new Color(50, 50, 50));
+        employeePanel.setBounds(0,0,400,600);
+        employeePanel.setLayout(null);
+        addEmployeeButtons(employeePanel);
+        addSaveLoad(employeePanel);
 
         eeNames = new DefaultListModel();
 
@@ -92,12 +91,15 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         eeList.setSelectedIndex(0);
         eeList.setVisibleRowCount(5);
         JScrollPane listScroller = new JScrollPane(eeList);
-        listScroller.setPreferredSize(new Dimension(250, 400));
-        c.gridwidth = 2;
-        c.ipady = 40;
-        c.gridx = 0;
-        c.gridy = 3;
-        employeePanel.add(listScroller, c);
+        listScroller.setBounds(65,129, 270, 400);
+        employeePanel.add(listScroller);
+
+//        JLabel eeLabel = new JLabel();
+//        eeLabel.setText("<html> PepsiCo.<br>Scheduler</html>");
+//        eeLabel.setFont(new Font("Georgia", Font.BOLD, 30));
+//        eeLabel.setBounds(85, 40, 270, 70);
+//        eeLabel.setForeground(new Color(0, 89, 179));
+//        employeePanel.add(eeLabel);
 
         return employeePanel;
     }
@@ -106,8 +108,8 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     // EFFECTS: Constructs a panel to contain employee functions
     private JPanel positionPanel() {
         JPanel positionPanel = new JPanel();
-        positionPanel.setBackground(new Color(209, 207, 226));
-        positionPanel.setBounds(400,0,800,700);
+        positionPanel.setBackground(new Color(50, 50, 50));
+        positionPanel.setBounds(400,0,600,600);
         positionPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         addPositionButtons(positionPanel, c);
@@ -119,31 +121,25 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: Creates a panel with buttons to add/remove employees and add/remove skills to each
-    private void addEmployeeButtons(JPanel p, GridBagConstraints c) {
+    private void addEmployeeButtons(JPanel p) {
         addEmployee = new JButton();
         addEmployee.setText("Add Employee");
         addEmployee.addActionListener(this);
-        addEmployee.setPreferredSize(new Dimension(140, 30));
-        c.gridx = 0;
-        c.gridy = 0;
-        p.add(addEmployee, c);
+        addEmployee.setBounds(65, 69, 135, 30);
+        p.add(addEmployee);
 
         removeEmployee = new JButton();
         removeEmployee.setText("Remove Employee");
         removeEmployee.addActionListener(this);
-        removeEmployee.setPreferredSize(new Dimension(140, 30));
-        c.gridx = 1;
-        c.gridy = 0;
-        p.add(removeEmployee, c);
+        removeEmployee.setBounds(200, 69, 135, 30);
+
+        p.add(removeEmployee);
 
         employeeSkills = new JButton();
         employeeSkills.setText("Add/Remove Skills");
         employeeSkills.addActionListener(this);
-        employeeSkills.setPreferredSize(new Dimension(280, 30));
-        c.gridwidth = 2;
-        c.gridx = 0;
-        c.gridy = 1;
-        p.add(employeeSkills, c);
+        employeeSkills.setBounds(65, 99, 270, 30);
+        p.add(employeeSkills);
     }
 
     // MODIFIES: this
@@ -201,6 +197,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane jsp = new JScrollPane(table);
         jsp.setPreferredSize(new Dimension(400, 400));
+        jsp.setColumnHeaderView(table.getTableHeader());
         c.gridwidth = 2;
         c.gridx = 0;
         c.gridy = 2;
@@ -208,23 +205,18 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     }
 
     // EFFECTS: Adds save and load buttons to the employee panel
-    private void addSaveLoad(JPanel p, GridBagConstraints c) {
+    private void addSaveLoad(JPanel p) {
         saveSchedule = new JButton();
         saveSchedule.setText("Save");
         saveSchedule.addActionListener(this);
-        saveSchedule.setPreferredSize(new Dimension(140, 30));
-        c.gridwidth = 1;
-        c.gridx = 0;
-        c.gridy = 2;
-        p.add(saveSchedule, c);
+        saveSchedule.setBounds(0,0, 100, 30);
+        p.add(saveSchedule);
 
         loadSchedule = new JButton();
         loadSchedule.setText("Load");
         loadSchedule.addActionListener(this);
-        loadSchedule.setPreferredSize(new Dimension(140, 30));
-        c.gridx = 1;
-        c.gridy = 2;
-        p.add(loadSchedule, c);
+        loadSchedule.setBounds(100,0, 100, 30);
+        p.add(loadSchedule);
     }
 
     // EFFECTS: Listens for button press and executes the corresponding method

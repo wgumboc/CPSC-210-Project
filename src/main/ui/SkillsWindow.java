@@ -22,6 +22,7 @@ public class SkillsWindow implements ActionListener {
     private Employee employee;
 
 
+    // EFFECTS: constructs the SkillsWindow object
     public SkillsWindow(Employee selectedEmployee) {
         allSkills = new SkillsList();
         allSkills.qcSkillsList();
@@ -38,6 +39,7 @@ public class SkillsWindow implements ActionListener {
         frame.setVisible(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: Constructs a panel to contain employee functions
     public JPanel skillsPanel() {
         skillsPanel = new JPanel();
@@ -51,6 +53,8 @@ public class SkillsWindow implements ActionListener {
         return skillsPanel;
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds the add/remove skills buttons to the panel
     public void addButtons(JPanel p) {
         addSkill = new JButton();
         addSkill.setText("Add Skill");
@@ -66,6 +70,7 @@ public class SkillsWindow implements ActionListener {
         p.add(removeSkill);
     }
 
+    // EFFECTS: listens for buttons to be pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addSkill) {
@@ -78,6 +83,8 @@ public class SkillsWindow implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the list of skills to the panel
     private void addLists() {
         skillNames = new DefaultListModel();
 
@@ -103,6 +110,8 @@ public class SkillsWindow implements ActionListener {
         addToJListData();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the appropriate labels to the panel
     private void addLabels() {
         JLabel skillNamesLabel = new JLabel();
         skillNamesLabel.setText("Available Skills:");
@@ -115,6 +124,8 @@ public class SkillsWindow implements ActionListener {
         skillsPanel.add(eeSkillsLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: add the skills that the employee possesses to the data
     private void addESkillsToData(SkillsList sl) {
         for (Skill s: sl.getList()) {
             String name = s.getSkillName();
@@ -124,6 +135,8 @@ public class SkillsWindow implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: add the skills that the employee does not posses to the data
     private void addToJListData() {
         for (Skill s: allSkills.getList()) {
             String name = s.getSkillName();
@@ -180,6 +193,7 @@ public class SkillsWindow implements ActionListener {
         }
     }
 
+    // EFFECTS: returns the skill that the user has selected in the list
     private Skill getSelectedSkill() {
         Skill selected = null;
 

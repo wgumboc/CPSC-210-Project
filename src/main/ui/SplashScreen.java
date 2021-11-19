@@ -20,19 +20,21 @@ import java.io.InputStream;
 public class SplashScreen extends JFrame {
     private JFrame frame;
     private String imagePath;
-    private static int SPLASH_SCREEN_TIME = 4000;
+    private static int SPLASH_SCREEN_TIME = 5000;
 
+    // EFFECTS: creates the splash screen for the application load
     public SplashScreen() {
         frame = new JFrame();
         frame.setResizable(false);
-        frame.setSize(640,360);
+        frame.setSize(445,447);
 
-        imagePath = "C:\\Users\\wgumb\\OneDrive\\Documents\\CPSC 210\\project_d2o8\\src\\main\\ui\\pepsiman.jpg";
+        imagePath = "C:\\Users\\wgumb\\OneDrive\\Documents\\CPSC 210\\project_d2o8\\src\\main\\ui\\MS Logo.png";
         ImageIcon i = new ImageIcon(imagePath);
 
 
-        Image image = i.getImage(); // transform it
-        Image newimg = image.getScaledInstance(640, 360,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        Image image = i.getImage();
+        //Image newimg = image.getScaledInstance(640, 360,  java.awt.Image.SCALE_SMOOTH); //pepsiman version
+        Image newimg = image.getScaledInstance(445, 447,  java.awt.Image.SCALE_SMOOTH);
         i = new ImageIcon(newimg);
 
         JLabel l = new JLabel(i);
@@ -54,10 +56,13 @@ public class SplashScreen extends JFrame {
 
         timer.setRepeats(false);
         timer.start();
-        playMusic("C:\\Users\\wgumb\\OneDrive\\Documents\\CPSC 210\\project_d2o8\\music\\pepsiman.wav");
+        playMusic("C:\\Users\\wgumb\\OneDrive\\Documents\\CPSC 210\\project_d2o8\\music\\Beat.wav");
 
     }
 
+    // taken from https://stackoverflow.com/questions/51751680/java-audioinputstream-
+    //            ioexception-cannot-read-a-single-byte-if-frame-size-1
+    // EFFECTS: plays music on startup
     public static void playMusic(String filepath) {
         InputStream music;
         try {

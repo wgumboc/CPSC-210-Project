@@ -20,11 +20,13 @@ public class SingleSkillSelection implements ActionListener {
     private PositionList positionList;
     private JTable table;
 
+    // EFFECTS: Constructs the SingleSkillSelection object without position
     public SingleSkillSelection(PositionList positionList, JTable table) {
         this.positionList = positionList;
         this.table = table;
     }
 
+    // EFFECTS: Constructs the SingleSkillSelection object
     public SingleSkillSelection(Position position, PositionList positionList, JTable table) {
         this.position = position;
         this.positionList = positionList;
@@ -37,12 +39,14 @@ public class SingleSkillSelection implements ActionListener {
         frame.setSize(400,400);
 
         frame.getContentPane().setBackground(new Color(171, 219, 227));
+        frame.setLocationRelativeTo(null);
 
         frame.add(skillsPanel());
 
         frame.setVisible(true);
     }
 
+    // MODIFIES: this
     // EFFECTS: Constructs a panel to contain employee functions
     public JPanel skillsPanel() {
         skillsPanel = new JPanel();
@@ -56,7 +60,8 @@ public class SingleSkillSelection implements ActionListener {
         return skillsPanel;
     }
 
-    //
+    // MODIFIES: this
+    // EFFECTS: Adds the add skills buttons to the panel
     public void addButtons(JPanel p) {
         addSkill = new JButton();
         addSkill.setText("Confirm Skill");
@@ -66,6 +71,7 @@ public class SingleSkillSelection implements ActionListener {
         p.add(addSkill);
     }
 
+    // EFFECTS: listens for buttons to be pressed
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addSkill) {
@@ -73,6 +79,8 @@ public class SingleSkillSelection implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the list of skills to the panel
     private void addLists() {
         skillNames = new DefaultListModel();
 
@@ -86,6 +94,8 @@ public class SingleSkillSelection implements ActionListener {
         addToJListData();
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the label "Available Skills" to the panel
     private void addLabels() {
         JLabel skillNamesLabel = new JLabel();
         skillNamesLabel.setText("Available Skills:");
@@ -93,6 +103,8 @@ public class SingleSkillSelection implements ActionListener {
         skillsPanel.add(skillNamesLabel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds the skills to the JList data
     private void addToJListData() {
         for (Skill s: allSkills.getList()) {
             String name = s.getSkillName();
@@ -113,6 +125,7 @@ public class SingleSkillSelection implements ActionListener {
         addToPositionData();
     }
 
+    // EFFECTS: gets the skill that the user selects
     private Skill getSelectedSkill() {
         Skill selected = null;
 
