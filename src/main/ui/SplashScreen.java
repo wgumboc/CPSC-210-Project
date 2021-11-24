@@ -28,7 +28,7 @@ public class SplashScreen extends JFrame {
         frame.setResizable(false);
         frame.setSize(445,447);
 
-        imagePath = "C:\\Users\\wgumb\\OneDrive\\Documents\\CPSC 210\\project_d2o8\\src\\main\\ui\\MS Logo.png";
+        imagePath = "C:\\Users\\wgumb\\IdeaProjects\\project_d2o8\\src\\main\\ui\\MS Logo.png";
         ImageIcon i = new ImageIcon(imagePath);
 
 
@@ -56,7 +56,7 @@ public class SplashScreen extends JFrame {
 
         timer.setRepeats(false);
         timer.start();
-        playMusic("C:\\Users\\wgumb\\OneDrive\\Documents\\CPSC 210\\project_d2o8\\music\\Beat.wav");
+        playMusic("C:\\Users\\wgumb\\IdeaProjects\\project_d2o8\\music\\Beat.wav");
 
     }
 

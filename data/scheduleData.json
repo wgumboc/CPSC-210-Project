@@ -56,9 +56,9 @@
         },
         {
             "name": "CIP 1 - GY",
-            "positionFull": false,
+            "positionFull": true,
             "requiredSkill": "CIP",
-            "positionEmployee": "null"
+            "positionEmployee": "413ab96a-a5b8-4ee8-bc04-7ebf3c8a81f7"
         },
         {
             "name": "CIP 2 - GY",
@@ -70,6 +70,18 @@
             "name": "CIP - PM",
             "positionFull": false,
             "requiredSkill": "CIP",
+            "positionEmployee": "null"
+        },
+        {
+            "name": "aw3gsth",
+            "positionFull": false,
+            "requiredSkill": "Line 5 Dole",
+            "positionEmployee": "null"
+        },
+        {
+            "name": "sergsrhrtdh",
+            "positionFull": false,
+            "requiredSkill": "Microbiology Tech",
             "positionEmployee": "null"
         }
     ],
@@ -99,9 +111,10 @@
                 {"skillName": "Cold Fill Rockstar"},
                 {"skillName": "Line 5 Gatorade"},
                 {"skillName": "Line 5 Dole"},
-                {"skillName": "Line 5 Sobe"}
+                {"skillName": "Line 5 Sobe"},
+                {"skillName": "CIP"}
             ],
-            "hasPosition": false,
+            "hasPosition": true,
             "name": "Bryan T",
             "employeeID": "413ab96a-a5b8-4ee8-bc04-7ebf3c8a81f7"
         },
@@ -147,8 +160,8 @@
                 {"skillName": "Cold Fill CSD"},
                 {"skillName": "Cold Fill Rockstar"},
                 {"skillName": "Line 5 Gatorade"},
-                {"skillName": "Line 5 Dole"},
-                {"skillName": "Line 5 Sobe"}
+                {"skillName": "Line 5 Sobe"},
+                {"skillName": "Microbiology Tech"}
             ],
             "hasPosition": false,
             "name": "Jakob G",
@@ -212,6 +225,12 @@
             "hasPosition": false,
             "name": "Darrell C",
             "employeeID": "e7c445c4-68ee-4e37-8a68-d480485f7460"
+        },
+        {
+            "employeeSkills": [],
+            "hasPosition": false,
+            "name": "Bob",
+            "employeeID": "b024981e-85eb-4804-9ca9-960006f3d872"
         }
     ]
 }
