@@ -35,6 +35,8 @@ public class EmployeeRoster {
     // EFFECTS: adds an employee to the roster
     public void addEmployee(Employee employee) {
         roster.add(employee);
+        EventLog.getInstance().logEvent(new Event(employee.getEmployeeName()
+                + " has been added to the roster."));
     }
 
     // MODIFIES: this
@@ -43,6 +45,8 @@ public class EmployeeRoster {
         for (int i = 0; i < roster.size(); i++) {
             if (roster.get(i) == employee) {
                 roster.remove(i);
+                EventLog.getInstance().logEvent(new Event(employee.getEmployeeName()
+                        + " has been removed from the roster."));
                 break;
             }
         }

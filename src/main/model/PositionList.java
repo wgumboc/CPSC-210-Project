@@ -34,6 +34,8 @@ public class PositionList {
     //EFFECTS: adds a position to the list
     public void addPosition(Position position) {
         allPositions.add(position);
+        EventLog.getInstance().logEvent(new Event(position.getPositionName()
+                + " has been added to the positions list."));
     }
 
     //MODIFIES: this
@@ -42,6 +44,8 @@ public class PositionList {
         for (int i = 0; i < allPositions.size(); i++) {
             if (allPositions.get(i) == position) {
                 allPositions.remove(i);
+                EventLog.getInstance().logEvent(new Event(position.getPositionName()
+                        + " has been removed to the positions list."));
                 break;
             }
         }
