@@ -158,9 +158,8 @@ public class SkillsWindow implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Employee already has " + skill, "",
                         JOptionPane.INFORMATION_MESSAGE);
             } else {
-                employee.getSkills().addSkill(skill);
+                employee.getSkills().addSkill(skill, employee);
 
-                System.out.println(skill.getSkillName() + " attributed to " + employee.getEmployeeName());
                 eeSkillNames.addElement(skill.getSkillName());
                 skillNames.remove(index);
             }
@@ -183,7 +182,7 @@ public class SkillsWindow implements ActionListener {
                 Skill skill = employeeSkills.getSkill(i);
                 String skillName = skill.getSkillName();
                 if (skillName.equals(removeName)) {
-                    employeeSkills.removeSkill(skill);
+                    employeeSkills.removeSkill(skill, employee);
                 }
             }
 

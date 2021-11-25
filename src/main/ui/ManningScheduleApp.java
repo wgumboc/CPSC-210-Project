@@ -247,7 +247,7 @@ public class ManningScheduleApp {
             System.out.println("Employee already has selected skill.");
             employeeMenu();
         } else {
-            employeeSkills.addSkill(skill);
+            employeeSkills.addSkill(skill, employee);
 
             System.out.println(skill.getSkillName() + " attributed to " + employee.getEmployeeName());
             displaySkills(employee);
@@ -276,7 +276,7 @@ public class ManningScheduleApp {
 
         if (inputNum < employeeSkills.skillsListSize()) {
             skillToRemove = employeeSkills.getSkill(inputNum);
-            employeeSkills.removeSkill(skillToRemove);
+            employeeSkills.removeSkill(skillToRemove, employee);
             System.out.println("Removed " + skillToRemove.getSkillName() + " from " + employee.getEmployeeName());
         } else {
             System.out.println("Not a valid selection");

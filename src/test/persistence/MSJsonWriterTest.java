@@ -1,10 +1,7 @@
 package persistence;
 
 import model.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import persistence.MSJsonReader;
-import persistence.MSJsonWriter;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +35,7 @@ public class MSJsonWriterTest {
             er.addEmployee(new Employee("Jackson"));
             Employee employee0 = er.getEmployee(0);
             SkillsList sl = employee0.getSkills();
-            sl.addSkill(new Skill("Rockstar"));
+            sl.addSkill(new Skill("Rockstar"), employee0);
 
             MSJsonWriter writer = new MSJsonWriter("./data/testWriterSchedule.json");
             writer.open();

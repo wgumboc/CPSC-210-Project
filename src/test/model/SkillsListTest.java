@@ -10,6 +10,7 @@ public class SkillsListTest {
     private Skill skill1;
     private Skill skill2;
     private Skill skill3;
+    private Employee employee;
 
     @BeforeEach
     public void runBefore() {
@@ -17,29 +18,30 @@ public class SkillsListTest {
         skill1 = new Skill("Line 5 Gatorade");
         skill2 = new Skill("Line 5 Dole");
         skill3 = new Skill("Batching");
+        employee = new Employee("test");
     }
 
     @Test
     public void testAddRemoveSkills() {
-        skillsList.addSkill(skill1);
-        skillsList.addSkill(skill2);
+        skillsList.addSkill(skill1, employee);
+        skillsList.addSkill(skill2, employee);
 
         assertEquals(skill1, skillsList.getSkill(0));
         assertEquals(skill2, skillsList.getSkill(1));
 
-        skillsList.removeSkill(skill1);
+        skillsList.removeSkill(skill1, employee);
 
         assertEquals(skill2, skillsList.getSkill(0));
 
-        skillsList.removeSkill(skill1);
+        skillsList.removeSkill(skill1, employee);
 
         assertEquals(skill2, skillsList.getSkill(0));
     }
 
     @Test
     public void testSkillsSize() {
-        skillsList.addSkill(skill1);
-        skillsList.addSkill(skill2);
+        skillsList.addSkill(skill1, employee);
+        skillsList.addSkill(skill2, employee);
 
         assertEquals(2,skillsList.skillsListSize());
     }
@@ -53,8 +55,8 @@ public class SkillsListTest {
 
     @Test
     public void testHasSkill() {
-        skillsList.addSkill(skill1);
-        skillsList.addSkill(skill2);
+        skillsList.addSkill(skill1, employee);
+        skillsList.addSkill(skill2, employee);
 
         assertTrue(skillsList.hasSkill(skill1));
         assertTrue(skillsList.hasSkill(skill2));

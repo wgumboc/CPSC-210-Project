@@ -33,8 +33,10 @@ public class SkillsList {
 
     // MODIFIES: this
     // EFFECTS: Adds a skill to the list of skills
-    public void addSkill(Skill skill) {
+    public void addSkill(Skill skill, Employee employee) {
         skillsList.add(skill);
+        EventLog.getInstance().logEvent(new Event(skill.getSkillName() + " attributed to "
+                + employee.getEmployeeName()));
     }
 
     // EFFECTS: Returns the size of the list of skills
@@ -55,10 +57,12 @@ public class SkillsList {
 
     //MODIFIES: this
     //EFFECTS: removes a skill from the list of skills
-    public void removeSkill(Skill skill) {
+    public void removeSkill(Skill skill, Employee employee) {
         for (int i = 0; i < skillsList.size(); i++) {
             if (skillsList.get(i) == skill) {
                 skillsList.remove(i);
+                EventLog.getInstance().logEvent(new Event(skill.getSkillName() + " removed from "
+                        + employee.getEmployeeName()));
                 break;
             }
         }

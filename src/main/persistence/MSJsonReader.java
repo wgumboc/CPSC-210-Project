@@ -93,7 +93,7 @@ public class MSJsonReader {
 
         for (Skill s: skills) {
             if (skillName.equals(s.getSkillName())) {
-                employeeSkills.addSkill(s);
+                employeeSkills.addSkill(s, employee);
             }
         }
     }

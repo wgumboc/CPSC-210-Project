@@ -32,6 +32,8 @@ public class Position {
                 this.positionEmployee = employee;
                 employee.giveAssignment();
                 positionFull = true;
+                EventLog.getInstance().logEvent(new Event(employee.getEmployeeName()
+                        + " has been assigned to " + name));
                 return true;
             } else {
                 return false;
@@ -75,6 +77,7 @@ public class Position {
             positionEmployee.removeAssignment();
             positionEmployee = null;
             positionFull = false;
+            EventLog.getInstance().logEvent(new Event("Cleared the assigned employee from " + name));
             return true;
         }
     }
