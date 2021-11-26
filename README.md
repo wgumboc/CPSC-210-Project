@@ -82,3 +82,17 @@ RockStar PM Shift has been removed to the positions list.
 
 Thu Nov 25 21:59:49 PST 2021
 Cleared the assigned employee from RockStar AM Shift
+
+## Phase 4: Task 3
+
+- take out employee functionalities from ManningScheduleAppGui and create EmployeePanel class that creates the panel 
+with its respective buttons and layout as well as corresponding methods
+- take out position functionalities from ManningScheduleAppGui and create PositionPanel class that creates the panel
+with its respective buttons and layout as well as corresponding methods
+- create a new class to house enumeration of the qcSkillsList pre-set from the SkillsList class
+- create a new abstract class that EmployeeRoster, PositionList, and SkillsList can extend since the add/remove to list
+methods within these classes are practically the same
+- use the observer pattern to have the employee list and positions table update every time an employee is added/removed
+from the roster, every time a position is added/removed from the list, or when an employee is assigned to the position
+- have the PositionSkillsWindow extend the EmployeeSkillsWindow class to re-use its functionality so that positions can
+require multiple skills that an employee needs to possess in order to fill the position
