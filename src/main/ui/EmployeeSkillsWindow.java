@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SkillsWindow implements ActionListener {
+public class EmployeeSkillsWindow implements ActionListener {
     private JFrame frame;
     private JPanel skillsPanel;
     private JButton addSkill;
@@ -23,7 +23,7 @@ public class SkillsWindow implements ActionListener {
 
 
     // EFFECTS: constructs the SkillsWindow object
-    public SkillsWindow(Employee selectedEmployee) {
+    public EmployeeSkillsWindow(Employee selectedEmployee) {
         allSkills = new SkillsList();
         allSkills.qcSkillsList();
         employee = selectedEmployee;

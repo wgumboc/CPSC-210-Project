@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SingleSkillSelection implements ActionListener {
+public class PositionSkillWindow implements ActionListener {
     private JFrame frame;
     private JPanel skillsPanel;
     private JButton addSkill;
@@ -21,13 +21,13 @@ public class SingleSkillSelection implements ActionListener {
     private JTable table;
 
     // EFFECTS: Constructs the SingleSkillSelection object without position
-    public SingleSkillSelection(PositionList positionList, JTable table) {
+    public PositionSkillWindow(PositionList positionList, JTable table) {
         this.positionList = positionList;
         this.table = table;
     }
 
     // EFFECTS: Constructs the SingleSkillSelection object
-    public SingleSkillSelection(Position position, PositionList positionList, JTable table) {
+    public PositionSkillWindow(Position position, PositionList positionList, JTable table) {
         this.position = position;
         this.positionList = positionList;
         this.table = table;

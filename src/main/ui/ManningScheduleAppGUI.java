@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 // Templated lists from https://docs.oracle.com/javase/tutorial/uiswing/examples/components/index.html
 public class ManningScheduleAppGUI extends JFrame implements ActionListener {
@@ -20,7 +19,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     private Schedule schedule;
     private EmployeeRoster roster;
     private PositionList positionList;
-    private SkillsList qcDepSkills;
     private MSJsonReader msJsonReader;
     private MSJsonWriter msJsonWriter;
     private JButton addEmployee;
@@ -36,7 +34,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
     private JList eeList;
     private DefaultListModel eeNames;
     private JTable table;
-    private Object[][] positionData;
     private SplashScreen splashScreen;
 
     // EFFECTS: initializes lists and brings up main menu
@@ -249,7 +246,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         int index = eeList.getSelectedIndex();
         if (index != -1) {
             Employee selectedEmployee = getSelectedEmployee();
-            SkillsWindow window = new SkillsWindow(selectedEmployee);
+            EmployeeSkillsWindow window = new EmployeeSkillsWindow(selectedEmployee);
         }
     }
 
@@ -276,7 +273,6 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         schedule = new Schedule();
         roster = schedule.getRoster();
         positionList = schedule.getPositionList();
-        qcDepSkills = schedule.getQCSkillsList();
     }
 
 
@@ -341,7 +337,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         if (!positionName.equals("")) {
             Position position = new Position(positionName, skill);
 
-            SingleSkillSelection s = new SingleSkillSelection(position, positionList, table);
+            PositionSkillWindow s = new PositionSkillWindow(position, positionList, table);
 
             positionList.addPosition(position);
         }
@@ -427,7 +423,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
         } else {
             position.fillPosition(employee);
             removeSelectedRows(table);
-            SingleSkillSelection s = new SingleSkillSelection(positionList, table);
+            PositionSkillWindow s = new PositionSkillWindow(positionList, table);
             s.addToPositionData();
             JOptionPane.showMessageDialog(null,employee.getEmployeeName()
                     + " has been assigned to " + position.getPositionName());
@@ -470,7 +466,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             employeeToRemove.removeAssignment();
             selectedPos.removeEmployee();
             removeSelectedRows(table);
-            SingleSkillSelection s = new SingleSkillSelection(positionList, table);
+            PositionSkillWindow s = new PositionSkillWindow(positionList, table);
             s.addToPositionData();
         }
     }
@@ -500,7 +496,7 @@ public class ManningScheduleAppGUI extends JFrame implements ActionListener {
             roster = schedule.getRoster();
             positionList = schedule.getPositionList();
             addToJListData();
-            SingleSkillSelection s = new SingleSkillSelection(positionList, table);
+            PositionSkillWindow s = new PositionSkillWindow(positionList, table);
             s.addToPositionData();
 
             JOptionPane.showMessageDialog(null, "Schedule Loaded Successfully", "",
