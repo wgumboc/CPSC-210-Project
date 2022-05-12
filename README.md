@@ -10,6 +10,8 @@ in positions required to be filled. This application serves to simplify the proc
 employees, visually showing the user which positions need to be filled, and alerting the user if there is a
 skills-position mismatch.
 
+## Functionality
+
 ### Save/Load
 The employee scheduler app features data persistence and is able to save and load user data.
 ![On Load](https://user-images.githubusercontent.com/19580530/168029904-8f6c84bb-559e-492b-9a44-0ead8c5dd7ba.JPG)
